@@ -1452,27 +1452,19 @@ nav a:hover {
 }
 
 
-/* ==================================================
-   LOADER
-================================================== */
+// ==================================================
+// LOADER
+// ==================================================
 
-.loader {
+const loader = document.querySelector(".loader");
 
-    position: fixed;
+if (loader) {
 
-    inset: 0;
+    setTimeout(() => {
 
-    display: grid;
+        loader.classList.add("hidden");
 
-    place-items: center;
-
-    background: var(--bg);
-
-    z-index: 9999;
-
-    transition:
-        opacity .6s ease,
-        visibility .6s ease;
+    }, 1000);
 
 }
 
