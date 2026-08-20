@@ -1,15 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("Visão em Foco carregado!");
+window.addEventListener("load", function () {
 
     const loader = document.querySelector(".loader");
 
     if (loader) {
-        loader.classList.add("hidden");
-
-        setTimeout(function () {
-            loader.style.display = "none";
-        }, 600);
+        loader.style.display = "none";
     }
 
 });
