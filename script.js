@@ -1478,4 +1478,253 @@ if (speechButton) {
     });
 
 }
+    // ==================================================
+// FAQ — ABRIR E FECHAR
+// ==================================================
+
+const faqQuestions =
+    document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach(question => {
+
+    question.addEventListener("click", () => {
+
+        const item =
+            question.closest(".faq-item");
+
+        if (!item) return;
+
+        const alreadyOpen =
+            item.classList.contains("active");
+
+
+        // Fecha os outros
+        document
+            .querySelectorAll(".faq-item.active")
+            .forEach(openItem => {
+
+                if (openItem !== item) {
+
+                    openItem.classList.remove(
+                        "active"
+                    );
+
+                    const icon =
+                        openItem.querySelector(
+                            ".faq-question span"
+                        );
+
+                    if (icon) {
+                        icon.textContent = "+";
+                    }
+
+                }
+
+            });
+
+
+        // Abre/fecha o atual
+        item.classList.toggle("active");
+
+
+        const icon =
+            question.querySelector("span");
+
+        if (icon) {
+
+            icon.textContent =
+                item.classList.contains("active")
+                    ? "−"
+                    : "+";
+
+        }
+
+    });
+
+// ==================================================
+// QUIZ — RESULTADO
+// ==================================================
+
+const quizButton =
+    document.querySelector("#quizSubmit");
+
+const quizResult =
+    document.querySelector("#quizResult");
+
+if (quizButton && quizResult) {
+
+    quizButton.addEventListener("click", () => {
+
+        const questions =
+            document.querySelectorAll(
+                ".quiz-question"
+            );
+
+        let score = 0;
+        let answered = 0;
+
+
+        questions.forEach(question => {
+
+            const selected =
+                question.querySelector(
+                    "input:checked"
+                );
+
+            if (!selected) return;
+
+            answered++;
+
+
+            if (
+                selected.dataset.correct === "true"
+            ) {
+
+                score++;
+
+            }
+
+        });
+
+
+        if (
+            questions.length > 0 &&
+            answered < questions.length
+        ) {
+
+            quizResult.textContent =
+                "⚠️ Responda todas as questões antes de finalizar.";
+
+            return;
+
+        }
+
+
+        if (questions.length === 0) {
+
+            quizResult.textContent =
+                "Nenhuma questão encontrada.";
+
+            return;
+
+        }
+
+
+        const percentage =
+            Math.round(
+                (score / questions.length) * 100
+            );
+
+
+        let message;
+
+
+        if (percentage === 100) {
+
+            message =
+                "🏆 Perfeito! Você acertou tudo!";
+
+        } else if (percentage >= 70) {
+
+            message =
+                "👏 Muito bom! Você mandou bem!";
+
+        } else if (percentage >= 50) {
+
+            message =
+                "👍 Bom trabalho! Dá para melhorar um pouco.";
+
+        } else {
+
+            message =
+                "📚 Continue estudando! Você vai conseguir.";
+
+        }
+
+
+        quizResult.innerHTML = `
+            <strong>${message}</strong>
+            <br>
+            Você acertou
+            <strong>${score}/${questions.length}</strong>
+            questões (${percentage}%).
+        `;
+
+    });
+
+}
+    // ==================================================
+// MODO CLARO / ESCURO
+// ==================================================
+
+const themeButton =
+    document.querySelector("#themeToggle");
+
+if (themeButton) {
+
+    // Recupera o tema salvo
+    const savedTheme =
+        localStorage.getItem("vision-theme");
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+    }
+
+
+    function updateThemeButton() {
+
+        const light =
+            document.body.classList.contains(
+                "light-mode"
+            );
+
+        themeButton.textContent =
+            light ? "☀️" : "🌙";
+
+        themeButton.setAttribute(
+            "aria-label",
+            light
+                ? "Ativar modo escuro"
+                : "Ativar modo claro"
+        );
+
+    }
+
+
+    updateThemeButton();
+
+
+    themeButton.addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "light-mode"
+            );
+
+
+            const light =
+                document.body.classList.contains(
+                    "light-mode"
+                );
+
+
+            localStorage.setItem(
+                "vision-theme",
+                light
+                    ? "light"
+                    : "dark"
+            );
+
+
+            updateThemeButton();
+
+        }
+    );
+
+}
 });
