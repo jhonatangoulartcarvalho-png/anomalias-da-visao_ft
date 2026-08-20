@@ -1567,3 +1567,130 @@ button {
         left .6s ease;
 
 }
+/* ==================================================
+   EFEITOS DO LABORATÓRIO
+================================================== */
+
+.vision-preview {
+    --vision-intensity: .5;
+    transition: filter .3s ease;
+}
+
+
+/* ------------------------------
+   MIOPIA
+------------------------------ */
+
+.vision-preview.vision-miopia .preview-content {
+    filter:
+        blur(
+            calc(3px * var(--vision-intensity))
+        );
+}
+
+
+/* ------------------------------
+   HIPERMETROPIA
+------------------------------ */
+
+.vision-preview.vision-hipermetropia .preview-content {
+    filter:
+        blur(
+            calc(2px * var(--vision-intensity))
+        );
+
+    transform:
+        scale(
+            calc(1 + (var(--vision-intensity) * .03))
+        );
+}
+
+
+/* ------------------------------
+   ASTIGMATISMO
+------------------------------ */
+
+.vision-preview.vision-astigmatismo .preview-content {
+    filter:
+        blur(
+            calc(1.5px * var(--vision-intensity))
+        );
+
+    transform:
+        skewX(
+            calc(4deg * var(--vision-intensity))
+        );
+}
+
+
+/* ------------------------------
+   PRESBIOPIA
+------------------------------ */
+
+.vision-preview.vision-presbiopia .preview-content {
+    filter:
+        blur(
+            calc(2.5px * var(--vision-intensity))
+        );
+}
+
+
+/* ------------------------------
+   CATARATA
+------------------------------ */
+
+.vision-preview.vision-catarata {
+
+    filter:
+        brightness(
+            calc(1 - (var(--vision-intensity) * .25))
+        )
+        blur(
+            calc(.8px * var(--vision-intensity))
+        );
+
+}
+
+
+.vision-preview.vision-catarata::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(210, 220, 200,
+        calc(.15 * var(--vision-intensity)));
+
+    pointer-events: none;
+
+}
+
+
+/* ------------------------------
+   DALTONISMO
+------------------------------ */
+
+.vision-preview.vision-daltonismo {
+
+    filter:
+        saturate(
+            calc(1 - (var(--vision-intensity) * .7))
+        );
+
+}
+
+
+/* ------------------------------
+   TRANSIÇÃO
+------------------------------ */
+
+.vision-preview .preview-content {
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
+
+}
