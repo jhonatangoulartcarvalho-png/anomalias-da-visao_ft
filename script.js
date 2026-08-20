@@ -36,7 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // SISTEMA ONLINE
     // ==========================================
 
-    console.log("✅ Sistema carregado!");
+    console.log("✅ Sistema carregado!"); 
+    
+});
 // ==========================================
 // PARTE 2 — MENU E NAVEGAÇÃO
 // ==========================================
@@ -208,4 +210,312 @@ if (topButton) {
 
 
 console.log("🧭 Parte 2 carregada!");
-});
+// ==========================================
+// PARTE 3 — TEMA E ACESSIBILIDADE
+// ==========================================
+
+
+// ==========================================
+// TEMA CLARO / ESCURO
+// ==========================================
+
+const themeButton = document.querySelector(
+    "[data-theme], #themeToggle, .theme-toggle"
+);
+
+
+// Recuperar tema salvo
+const savedTheme =
+    localStorage.getItem("vision-theme");
+
+
+if (savedTheme === "light") {
+
+    document.body.classList.add(
+        "light-mode"
+    );
+
+}
+
+
+if (themeButton) {
+
+    themeButton.addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "light-mode"
+            );
+
+
+            const isLight =
+                document.body.classList.contains(
+                    "light-mode"
+                );
+
+
+            localStorage.setItem(
+                "vision-theme",
+                isLight
+                    ? "light"
+                    : "dark"
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// PAINEL DE ACESSIBILIDADE
+// ==========================================
+
+const accessibilityButton =
+    document.querySelector(
+        "[data-accessibility], #accessibilityToggle"
+    );
+
+
+const accessibilityPanel =
+    document.querySelector(
+        ".accessibility-panel, #accessibilityPanel"
+    );
+
+
+const accessibilityClose =
+    document.querySelector(
+        ".accessibility-close"
+    );
+
+
+if (
+    accessibilityButton &&
+    accessibilityPanel
+) {
+
+    accessibilityButton.addEventListener(
+        "click",
+        () => {
+
+            accessibilityPanel.classList.toggle(
+                "active"
+            );
+
+        }
+    );
+
+}
+
+
+if (
+    accessibilityClose &&
+    accessibilityPanel
+) {
+
+    accessibilityClose.addEventListener(
+        "click",
+        () => {
+
+            accessibilityPanel.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// ALTO CONTRASTE
+// ==========================================
+
+const contrastButton =
+    document.querySelector(
+        "[data-contrast]"
+    );
+
+
+if (contrastButton) {
+
+    contrastButton.addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "high-contrast"
+            );
+
+
+            const enabled =
+                document.body.classList.contains(
+                    "high-contrast"
+                );
+
+
+            localStorage.setItem(
+                "vision-contrast",
+                enabled
+            );
+
+        }
+    );
+
+}
+
+
+// Recuperar contraste salvo
+
+if (
+    localStorage.getItem(
+        "vision-contrast"
+    ) === "true"
+) {
+
+    document.body.classList.add(
+        "high-contrast"
+    );
+
+}
+
+
+// ==========================================
+// AUMENTAR FONTE
+// ==========================================
+
+const fontPlus =
+    document.querySelector(
+        "[data-font-plus]"
+    );
+
+
+const fontMinus =
+    document.querySelector(
+        "[data-font-minus]"
+    );
+
+
+const fontNormal =
+    document.querySelector(
+        "[data-font-normal]"
+    );
+
+
+let fontSize =
+    Number(
+        localStorage.getItem(
+            "vision-font-size"
+        )
+    ) || 100;
+
+
+function updateFontSize() {
+
+    document.body.style.fontSize =
+        fontSize + "%";
+
+
+    localStorage.setItem(
+        "vision-font-size",
+        fontSize
+    );
+
+}
+
+
+if (fontPlus) {
+
+    fontPlus.addEventListener(
+        "click",
+        () => {
+
+            fontSize =
+                Math.min(
+                    fontSize + 10,
+                    140
+                );
+
+
+            updateFontSize();
+
+        }
+    );
+
+}
+
+
+if (fontMinus) {
+
+    fontMinus.addEventListener(
+        "click",
+        () => {
+
+            fontSize =
+                Math.max(
+                    fontSize - 10,
+                    80
+                );
+
+
+            updateFontSize();
+
+        }
+    );
+
+}
+
+
+if (fontNormal) {
+
+    fontNormal.addEventListener(
+        "click",
+        () => {
+
+            fontSize = 100;
+
+            updateFontSize();
+
+        }
+    );
+
+}
+
+
+updateFontSize();
+
+
+// ==========================================
+// NAVEGAÇÃO POR TECLADO
+// ==========================================
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Tab") {
+
+            document.body.classList.add(
+                "keyboard-navigation"
+            );
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "mousedown",
+    () => {
+
+        document.body.classList.remove(
+            "keyboard-navigation"
+        );
+
+    }
+);
+
+
+console.log("♿ Parte 3 carregada!");
