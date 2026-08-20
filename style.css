@@ -2304,3 +2304,90 @@ button {
     }
 
 }
+/* ==================================================
+   DISCO DE NEWTON — VISUAL
+================================================== */
+
+.newton-disk {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 0 35px rgba(255,255,255,.08);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+
+/* Centro do disco */
+
+.newton-disk::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background:
+        #f5f7ff;
+
+    border:
+        5px solid #111827;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.25);
+
+}
+
+
+/* Quando estiver girando */
+
+.newton-disk.spinning {
+
+    box-shadow:
+        0 0 55px rgba(255,255,255,.2);
+
+}
+
+
+/* Botão */
+
+#newtonButton {
+
+    margin-top: 22px;
+
+}
+
+
+/* ==================================================
+   MOVIMENTO DO DISCO
+================================================== */
+
+@keyframes newtonSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.newton-disk.spinning {
+
+    animation:
+        newtonSpin 1s linear infinite;
+
+}
