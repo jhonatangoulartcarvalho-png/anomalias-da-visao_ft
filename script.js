@@ -4,17 +4,29 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ==================================================
-    // LOADER
-    // ==================================================
+   // ==================================================
+// LOADER
+// ==================================================
 
-    const loader = document.querySelector(".loader");
+const loader = document.querySelector(".loader");
 
-    setTimeout(() => {
-        if (loader) {
+if (loader) {
+
+    window.addEventListener("load", () => {
+
+        setTimeout(() => {
+
             loader.classList.add("hidden");
-        }
-    }, 900);
+
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 600);
+
+        }, 800);
+
+    });
+
+}
 
 
     // ==================================================
