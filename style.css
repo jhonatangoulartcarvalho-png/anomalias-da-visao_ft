@@ -2102,3 +2102,8 @@ nav a.active {
     visibility: hidden;
     pointer-events: none;
 }
+   /* TESTE LOADER */
+
+.loader {
+    display: none !important;
+}
