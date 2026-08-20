@@ -1415,3 +1415,155 @@ button {
     }
 
 }
+/* ==================================================
+   ANIMAÇÕES
+================================================== */
+
+.card {
+
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    animation:
+        cardAppear .7s ease forwards;
+
+}
+
+
+.card:nth-child(2) {
+    animation-delay: .1s;
+}
+
+
+.card:nth-child(3) {
+    animation-delay: .2s;
+}
+
+
+.card:nth-child(4) {
+    animation-delay: .3s;
+}
+
+
+.card:nth-child(5) {
+    animation-delay: .4s;
+}
+
+
+.card:nth-child(6) {
+    animation-delay: .5s;
+}
+
+
+@keyframes cardAppear {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==================================================
+   EFEITO DE DESTAQUE NOS CARDS
+================================================== */
+
+.card {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 80%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--primary),
+            transparent
+        );
+
+    transition:
+        left .5s ease;
+
+}
+
+
+.card:hover::before {
+
+    left: 120%;
+
+}
+
+
+/* ==================================================
+   EFEITO NO BOTÃO
+================================================== */
+
+.button {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.button::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -120%;
+
+    width: 70%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.35),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+}
+
+
+.button:hover::after {
+
+    left: 140%;
+
+    transition:
+        left .6s ease;
+
+}
