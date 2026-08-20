@@ -299,5 +299,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
     );
+// ==================================================
+// ACESSIBILIDADE
+// ==================================================
 
+const librasButton =
+    document.getElementById("librasButton");
+
+
+if (librasButton) {
+
+    librasButton.addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "accessibility-mode"
+            );
+
+
+            const active =
+                document.body.classList.contains(
+                    "accessibility-mode"
+                );
+
+
+            librasButton.textContent =
+                active
+                    ? "Desativar acessibilidade"
+                    : "Ativar acessibilidade";
+
+        }
+    );
+
+}
 });
