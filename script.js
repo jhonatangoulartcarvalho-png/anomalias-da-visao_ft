@@ -1295,5 +1295,33 @@ window.addEventListener(
 
 updateActiveLink();
 });
+    // ==================================================
+// PAUSAR ANIMAÇÕES
+// ==================================================
+
+const motionButton =
+    document.querySelector("[data-motion]");
+
+if (motionButton) {
+
+    motionButton.addEventListener("click", () => {
+
+        document.body.classList.toggle(
+            "reduced-motion"
+        );
+
+        const paused =
+            document.body.classList.contains(
+                "reduced-motion"
+            );
+
+        motionButton.textContent =
+            paused
+                ? "▶️ Retomar animações"
+                : "⏸️ Pausar animações";
+
+    });
+
+}
 
 });
