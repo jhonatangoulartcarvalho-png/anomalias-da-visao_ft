@@ -1392,4 +1392,90 @@ if (newtonButton && newtonDisk) {
     });
 
 }
+    // ==================================================
+// VOLTAR AO TOPO
+// ==================================================
+
+const backToTop = document.querySelector("#backToTop");
+
+if (backToTop) {
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 400) {
+            backToTop.classList.add("visible");
+        } else {
+            backToTop.classList.remove("visible");
+        }
+
+    });
+
+    backToTop.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+}
+    // ==================================================
+// LEITOR DE TEXTO
+// ==================================================
+
+const speechButton =
+    document.querySelector("[data-speech]");
+
+if (speechButton) {
+
+    speechButton.addEventListener("click", () => {
+
+        if (!("speechSynthesis" in window)) {
+
+            alert(
+                "Seu navegador não suporta leitura de texto."
+            );
+
+            return;
+        }
+
+        // Se já estiver lendo, para
+        if (speechSynthesis.speaking) {
+
+            speechSynthesis.cancel();
+
+            speechButton.textContent =
+                "🔊 Ler página";
+
+            return;
+        }
+
+        const text =
+            document.body.innerText;
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "pt-BR";
+
+        speech.rate = 0.9;
+
+        speech.pitch = 1;
+
+        speech.onend = () => {
+
+            speechButton.textContent =
+                "🔊 Ler página";
+
+        };
+
+        speechSynthesis.speak(speech);
+
+        speechButton.textContent =
+            "⏹ Parar leitura";
+
+    });
+
+}
 });
