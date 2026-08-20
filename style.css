@@ -1963,3 +1963,136 @@ button {
     }
 
 }
+/* ==================================================
+   MENU MOBILE — AJUSTES
+================================================== */
+
+@media (max-width: 1000px) {
+
+    .header {
+
+        position: sticky;
+
+    }
+
+
+    .nav {
+
+        max-height: 0;
+
+        overflow: hidden;
+
+        opacity: 0;
+
+        transform:
+            translateY(-10px);
+
+        transition:
+            max-height .35s ease,
+            opacity .25s ease,
+            transform .25s ease;
+
+    }
+
+
+    .nav.active {
+
+        max-height: 500px;
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+
+    .nav a {
+
+        width: 100%;
+
+        padding:
+            8px 0;
+
+    }
+
+
+    .menu-button {
+
+        transition:
+            transform .25s ease;
+
+    }
+
+
+    .nav.active + .menu-button {
+
+        transform:
+            rotate(90deg);
+
+    }
+
+}
+
+
+/* ==================================================
+   NAVEGAÇÃO — DESTAQUE
+================================================== */
+
+.nav a {
+
+    position: relative;
+
+}
+
+
+.nav a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -5px;
+
+    width: 0;
+
+    height: 2px;
+
+    background:
+        var(--primary);
+
+    transition:
+        width .25s ease;
+
+}
+
+
+.nav a:hover::after {
+
+    width: 100%;
+
+}
+
+
+/* ==================================================
+   HEADER MAIS ELEGANTE
+================================================== */
+
+.header {
+
+    transition:
+        box-shadow .3s ease,
+        background .3s ease;
+
+}
+
+
+.header:hover {
+
+    box-shadow:
+        0 8px 35px
+        rgba(0,0,0,.18);
+
+}
