@@ -2096,3 +2096,211 @@ button {
         rgba(0,0,0,.18);
 
 }
+/* ==================================================
+   HERO — EFEITO VISUAL
+================================================== */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+}
+
+
+/* brilho de fundo */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    top: 10%;
+    right: 5%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(88,230,255,.12),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
+
+
+/* ==================================================
+   OLHO PRINCIPAL
+================================================== */
+
+.big-eye {
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+
+}
+
+
+.big-eye:hover {
+
+    transform:
+        scale(1.03);
+
+    box-shadow:
+
+        0 0 80px
+        rgba(88,230,255,.3),
+
+        0 0 160px
+        rgba(118,92,255,.18);
+
+}
+
+
+/* ==================================================
+   ÍRIS
+================================================== */
+
+.eye-iris {
+
+    transition:
+        transform .4s ease;
+
+}
+
+
+.big-eye:hover .eye-iris {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* ==================================================
+   BRILHO DO OLHO
+================================================== */
+
+.eye-shine {
+
+    animation:
+        shineMove 4s ease-in-out infinite;
+
+}
+
+
+@keyframes shineMove {
+
+    0%,
+    100% {
+
+        transform:
+            translate(0, 0);
+
+        opacity: .65;
+
+    }
+
+    50% {
+
+        transform:
+            translate(-8px, 8px);
+
+        opacity: .95;
+
+    }
+
+}
+
+
+/* ==================================================
+   TEXTO DO HERO
+================================================== */
+
+.hero-content {
+
+    animation:
+        heroText .8s ease forwards;
+
+}
+
+
+@keyframes heroText {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateX(-25px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateX(0);
+
+    }
+
+}
+
+
+/* ==================================================
+   BOTÃO PRINCIPAL
+================================================== */
+
+.hero .button {
+
+    box-shadow:
+        0 8px 25px
+        rgba(88,230,255,.12);
+
+}
+
+
+.hero .button:hover {
+
+    box-shadow:
+        0 12px 35px
+        rgba(88,230,255,.28);
+
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE DO HERO
+================================================== */
+
+@media (max-width: 700px) {
+
+    .hero::before {
+
+        width: 300px;
+        height: 300px;
+
+        right: -100px;
+
+    }
+
+
+    .hero h1 {
+
+        letter-spacing:
+            -2px;
+
+    }
+
+}
