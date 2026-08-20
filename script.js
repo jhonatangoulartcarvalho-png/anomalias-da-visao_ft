@@ -980,4 +980,384 @@ document.addEventListener("DOMContentLoaded", () => {
 
         observer.observe(element);
 
+      /* =====================================================
+       SIMULADOR DE ANOMALIAS DA VISÃO
+       ===================================================== */
+
+    const visionSelect =
+        document.querySelector("#visionType");
+
+    const visionSimulation =
+        document.querySelector(
+            ".vision-simulation"
+        );
+
+    const simulationTitle =
+        document.querySelector(
+            "#simulationTitle"
+        );
+
+    const simulationDescription =
+        document.querySelector(
+            ".simulation-description"
+        );
+
+
+    const visionData = {
+
+        normal: {
+            title: "Visão normal",
+
+            description:
+                "Esta simulação representa uma visão sem alterações ópticas aplicadas.",
+
+            className: ""
+        },
+
+
+        miopia: {
+            title: "Simulação de miopia",
+
+            description:
+                "Na simulação, objetos mais distantes aparecem desfocados.",
+
+            className:
+                "visao-miopia"
+        },
+
+
+        hipermetropia: {
+            title: "Simulação de hipermetropia",
+
+            description:
+                "A imagem apresenta uma alteração de nitidez, especialmente para objetos próximos.",
+
+            className:
+                "visao-hipermetropia"
+        },
+
+
+        astigmatismo: {
+            title: "Simulação de astigmatismo",
+
+            description:
+                "A imagem apresenta distorções que representam alterações no foco provocadas pela curvatura irregular dos meios ópticos.",
+
+            className:
+                "visao-astigmatismo"
+        },
+
+
+        daltonismo: {
+            title: "Simulação de daltonismo",
+
+            description:
+                "As cores da cena são alteradas para representar, de forma simplificada, diferenças na percepção cromática.",
+
+            className:
+                "visao-daltonismo"
+        },
+
+
+        catarata: {
+            title: "Simulação de catarata",
+
+            description:
+                "A cena fica mais difusa e com menor contraste, representando de forma simplificada a perda de transparência do cristalino.",
+
+            className:
+                "visao-catarata"
+        }
+
+    };
+
+
+    function updateVisionSimulation(
+        type
+    ) {
+
+        if (!visionSimulation)
+            return;
+
+
+        const data =
+            visionData[type];
+
+
+        if (!data)
+            return;
+
+
+        /* Remove todas as classes anteriores */
+
+        Object.values(
+            visionData
+        ).forEach(item => {
+
+            if (item.className) {
+
+                visionSimulation.classList.remove(
+                    item.className
+                );
+
+            }
+
+        });
+
+
+        /* Adiciona a nova condição */
+
+        if (data.className) {
+
+            visionSimulation.classList.add(
+                data.className
+            );
+
+        }
+
+
+        /* Atualiza título */
+
+        if (simulationTitle) {
+
+            simulationTitle.textContent =
+                data.title;
+
+        }
+
+
+        /* Atualiza descrição */
+
+        if (
+            simulationDescription
+        ) {
+
+            simulationDescription.textContent =
+                data.description;
+
+        }
+
+    }
+
+
+    if (visionSelect) {
+
+        visionSelect.addEventListener(
+            "change",
+            () => {
+
+                updateVisionSimulation(
+                    visionSelect.value
+                );
+
+            }
+        );
+
+
+        updateVisionSimulation(
+            visionSelect.value ||
+            "normal"
+        );
+
+    }
+
+
+    /* =====================================================
+       CONTROLE DE INTENSIDADE
+       ===================================================== */
+
+    const intensitySlider =
+        document.querySelector(
+            "#visionIntensity"
+        );
+
+    const intensityValue =
+        document.querySelector(
+            "#intensityValue"
+        );
+
+
+    if (
+        intensitySlider &&
+        visionSimulation
+    ) {
+
+        intensitySlider.addEventListener(
+            "input",
+            () => {
+
+                const value =
+                    Number(
+                        intensitySlider.value
+                    );
+
+
+                if (intensityValue) {
+
+                    intensityValue.textContent =
+                        value + "%";
+
+                }
+
+
+                visionSimulation.style.setProperty(
+                    "--vision-intensity",
+                    value
+                );
+
+
+                applyVisionIntensity(
+                    value
+                );
+
+            }
+        );
+
+    }
+
+
+    function applyVisionIntensity(
+        value
+    ) {
+
+        if (!visionSimulation)
+            return;
+
+
+        const type =
+            visionSelect
+                ? visionSelect.value
+                : "normal";
+
+
+        const intensity =
+            value / 100;
+
+
+        switch (type) {
+
+            case "miopia":
+
+                visionSimulation.style.filter =
+                    `blur(${1 + intensity * 8}px)`;
+
+                break;
+
+
+            case "hipermetropia":
+
+                visionSimulation.style.filter =
+                    `blur(${.5 + intensity * 5}px)
+                     contrast(${1 - intensity * .25})`;
+
+                break;
+
+
+            case "astigmatismo":
+
+                visionSimulation.style.filter =
+                    `blur(${1 + intensity * 4}px)`;
+
+                visionSimulation.style.transform =
+                    `scaleX(${1 + intensity * .08})`;
+
+                break;
+
+
+            case "daltonismo":
+
+                visionSimulation.style.filter =
+                    `grayscale(${intensity * .7})
+                     sepia(${intensity * .25})`;
+
+                break;
+
+
+            case "catarata":
+
+                visionSimulation.style.filter =
+                    `blur(${1 + intensity * 6}px)
+                     brightness(${1 + intensity * .15})
+                     contrast(${1 - intensity * .35})`;
+
+                break;
+
+
+            default:
+
+                visionSimulation.style.filter =
+                    "none";
+
+                visionSimulation.style.transform =
+                    "none";
+
+                break;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       BOTÃO RESET DO SIMULADOR
+       ===================================================== */
+
+    const resetSimulation =
+        document.querySelector(
+            "#resetSimulation"
+        );
+
+
+    if (resetSimulation) {
+
+        resetSimulation.addEventListener(
+            "click",
+            () => {
+
+                if (visionSelect) {
+
+                    visionSelect.value =
+                        "normal";
+
+                }
+
+
+                if (intensitySlider) {
+
+                    intensitySlider.value =
+                        50;
+
+                }
+
+
+                if (intensityValue) {
+
+                    intensityValue.textContent =
+                        "50%";
+
+                }
+
+
+                if (visionSimulation) {
+
+                    visionSimulation.className =
+                        "vision-simulation";
+
+                    visionSimulation.style.filter =
+                        "none";
+
+                    visionSimulation.style.transform =
+                        "none";
+
+                }
+
+
+                updateVisionSimulation(
+                    "normal"
+                );
+
+            }
+        );
+
+    }
     });
