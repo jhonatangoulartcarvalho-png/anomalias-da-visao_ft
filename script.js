@@ -378,4 +378,44 @@ if (backToTop) {
     );
 
 }
+    // ==================================================
+// PROGRESSO DA PÁGINA
+// ==================================================
+
+const scrollProgress =
+    document.getElementById("scrollProgress");
+
+
+if (scrollProgress) {
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            const scrollTop =
+                window.scrollY;
+
+            const documentHeight =
+                document.documentElement.scrollHeight
+                - window.innerHeight;
+
+            if (documentHeight <= 0) {
+
+                scrollProgress.style.width =
+                    "0%";
+
+                return;
+
+            }
+
+            const progress =
+                (scrollTop / documentHeight) * 100;
+
+            scrollProgress.style.width =
+                progress + "%";
+
+        }
+    );
+
+}
 });
