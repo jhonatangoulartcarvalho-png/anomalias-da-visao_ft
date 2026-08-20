@@ -452,4 +452,54 @@ if (themeButton) {
     );
 
 }
+    // ==================================================
+// ANIMAÇÃO DAS SEÇÕES
+// ==================================================
+
+const sections =
+    document.querySelectorAll(".section");
+
+
+if (sections.length) {
+
+    const sectionObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "show"
+                            );
+
+                            sectionObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    sections.forEach(
+        (section) => {
+
+            sectionObserver.observe(
+                section
+            );
+
+        }
+    );
+
+}
 });
