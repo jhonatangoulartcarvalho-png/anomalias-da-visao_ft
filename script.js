@@ -698,4 +698,273 @@ document.addEventListener(
 console.log(
     "✨ Parte 4 carregada!"
 );
+// ==========================================
+// PARTE 5 — LABORATÓRIO / SIMULADOR
+// ==========================================
+
+
+// ==========================================
+// ELEMENTOS DO SIMULADOR
+// ==========================================
+
+const visionSelect =
+    document.querySelector(
+        "#visionType"
+    );
+
+const intensitySlider =
+    document.querySelector(
+        "#visionIntensity"
+    );
+
+const intensityValue =
+    document.querySelector(
+        "#intensityValue"
+    );
+
+const visionPreview =
+    document.querySelector(
+        "#visionPreview"
+    );
+
+const resetVision =
+    document.querySelector(
+        "#resetVision"
+    );
+
+
+// ==========================================
+// ATUALIZAR SIMULAÇÃO
+// ==========================================
+
+function updateVisionSimulation() {
+
+    // Se o simulador não existir,
+    // não faz nada.
+
+    if (!visionPreview) {
+        return;
+    }
+
+
+    const type =
+        visionSelect
+            ? visionSelect.value
+            : "normal";
+
+
+    const intensity =
+        intensitySlider
+            ? Number(
+                intensitySlider.value
+            )
+            : 50;
+
+
+    // Remove efeitos anteriores
+
+    visionPreview.classList.remove(
+        "normal",
+        "miopia",
+        "hipermetropia",
+        "astigmatismo",
+        "presbiopia",
+        "catarata",
+        "daltonismo"
+    );
+
+
+    // Adiciona o efeito escolhido
+
+    visionPreview.classList.add(
+        type
+    );
+
+
+    // Atualiza o número da intensidade
+
+    if (intensityValue) {
+
+        intensityValue.textContent =
+            intensity + "%";
+
+    }
+
+
+    // ======================================
+    // EFEITOS VISUAIS
+    // ======================================
+
+    let blur = 0;
+
+    let brightness = 1;
+
+    let contrast = 1;
+
+
+    switch (type) {
+
+        case "miopia":
+
+            blur =
+                intensity * 0.04;
+
+            break;
+
+
+        case "hipermetropia":
+
+            blur =
+                intensity * 0.03;
+
+            break;
+
+
+        case "astigmatismo":
+
+            blur =
+                intensity * 0.025;
+
+            contrast =
+                0.9;
+
+            break;
+
+
+        case "presbiopia":
+
+            blur =
+                intensity * 0.035;
+
+            break;
+
+
+        case "catarata":
+
+            blur =
+                intensity * 0.04;
+
+            brightness =
+                0.8;
+
+            contrast =
+                0.75;
+
+            break;
+
+
+        case "daltonismo":
+
+            contrast =
+                0.9;
+
+            break;
+
+
+        default:
+
+            blur = 0;
+
+            break;
+
+    }
+
+
+    // ======================================
+    // APLICA O EFEITO
+    // ======================================
+
+    if (
+        type === "daltonismo"
+    ) {
+
+        visionPreview.style.filter =
+            `grayscale(${intensity * 0.7}%)`;
+
+    }
+
+    else {
+
+        visionPreview.style.filter =
+            `blur(${blur}px)
+             brightness(${brightness})
+             contrast(${contrast})`;
+
+    }
+
+}
+
+
+// ==========================================
+// ALTERAÇÃO DO TIPO DE VISÃO
+// ==========================================
+
+if (visionSelect) {
+
+    visionSelect.addEventListener(
+        "change",
+        updateVisionSimulation
+    );
+
+}
+
+
+// ==========================================
+// ALTERAÇÃO DA INTENSIDADE
+// ==========================================
+
+if (intensitySlider) {
+
+    intensitySlider.addEventListener(
+        "input",
+        updateVisionSimulation
+    );
+
+}
+
+
+// ==========================================
+// BOTÃO RESET
+// ==========================================
+
+if (resetVision) {
+
+    resetVision.addEventListener(
+        "click",
+        () => {
+
+            if (visionSelect) {
+
+                visionSelect.value =
+                    "normal";
+
+            }
+
+
+            if (intensitySlider) {
+
+                intensitySlider.value =
+                    50;
+
+            }
+
+
+            updateVisionSimulation();
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+
+updateVisionSimulation();
+
+
+console.log(
+    "🧪 Parte 5 carregada!"
+);
 
