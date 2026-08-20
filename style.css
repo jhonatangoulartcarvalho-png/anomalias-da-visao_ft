@@ -2732,3 +2732,68 @@ body.accessibility-mode .button {
         18px;
 
 }
+/* ==================================================
+   VOLTAR AO TOPO
+================================================== */
+
+.back-to-top {
+
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+    place-items: center;
+
+    color: #031017;
+
+    background:
+        var(--primary);
+
+    border: none;
+
+    border-radius: 50%;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        .3s ease;
+
+    z-index: 900;
+
+}
+
+
+.back-to-top.visible {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.back-to-top:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(88,230,255,.3);
+
+}
