@@ -5,15 +5,19 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 
-
-   // ==================================================
+// ==================================================
 // LOADER
 // ==================================================
 
-   const loader = document.querySelector(".loader");
+const loader = document.querySelector(".loader");
 
 if (loader) {
-    loader.style.display = "none";
+
+    setTimeout(() => {
+
+        loader.classList.add("hidden");
+
+    }, 1000);
 
 }
 
