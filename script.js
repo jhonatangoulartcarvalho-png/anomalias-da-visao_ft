@@ -530,3 +530,454 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+    /* =====================================================
+       PESQUISA DAS ANOMALIAS
+       ===================================================== */
+
+    const searchInput =
+        document.querySelector("#anomalySearch");
+
+    const anomalyCards =
+        document.querySelectorAll(".anomaly-card");
+
+
+    function searchAnomalies() {
+
+        if (!searchInput) return;
+
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+        anomalyCards.forEach(card => {
+
+            const text =
+                card.textContent.toLowerCase();
+
+            if (text.includes(search)) {
+
+                card.classList.remove("hidden");
+
+            } else {
+
+                card.classList.add("hidden");
+
+            }
+
+        });
+
+    }
+
+
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            "input",
+            searchAnomalies
+        );
+
+    }
+
+
+    /* =====================================================
+       FILTROS
+       ===================================================== */
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".filter-button"
+        );
+
+
+    filterButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                filterButtons.forEach(btn => {
+
+                    btn.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                const filter =
+                    button.dataset.filter;
+
+
+                anomalyCards.forEach(card => {
+
+                    const category =
+                        card.dataset.category;
+
+
+                    if (
+                        filter === "all" ||
+                        category === filter
+                    ) {
+
+                        card.classList.remove(
+                            "hidden"
+                        );
+
+                    } else {
+
+                        card.classList.add(
+                            "hidden"
+                        );
+
+                    }
+
+                });
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       MODAIS DAS ANOMALIAS
+       ===================================================== */
+
+    const modal =
+        document.querySelector(".modal");
+
+    const modalTitle =
+        document.querySelector(
+            ".modal-title"
+        );
+
+    const modalText =
+        document.querySelector(
+            ".modal-text"
+        );
+
+    const modalClose =
+        document.querySelector(
+            ".modal-close"
+        );
+
+
+    const anomalyData = {
+
+        miopia: {
+            title: "Miopia",
+            text:
+                "Na miopia, objetos próximos podem ser vistos com mais nitidez enquanto objetos distantes apresentam dificuldade de foco. Isso acontece quando a imagem tende a se formar antes da retina."
+        },
+
+        hipermetropia: {
+            title: "Hipermetropia",
+            text:
+                "Na hipermetropia, existe dificuldade principalmente para focalizar objetos próximos. O sistema óptico do olho precisa ajustar o foco para que a imagem seja formada corretamente na retina."
+        },
+
+        astigmatismo: {
+            title: "Astigmatismo",
+            text:
+                "O astigmatismo está relacionado a uma curvatura irregular da córnea ou de outras estruturas ópticas do olho, podendo causar distorção ou dificuldade de nitidez."
+        },
+
+        daltonismo: {
+            title: "Daltonismo",
+            text:
+                "O daltonismo envolve diferenças na percepção de determinadas cores. Ele está relacionado ao funcionamento dos cones presentes na retina."
+        },
+
+        catarata: {
+            title: "Catarata",
+            text:
+                "A catarata ocorre quando o cristalino perde transparência, podendo deixar a visão mais embaçada e reduzir a passagem adequada da luz."
+        },
+
+        glaucoma: {
+            title: "Glaucoma",
+            text:
+                "O glaucoma é um conjunto de condições que pode afetar o nervo óptico. A detecção e o acompanhamento por profissionais de saúde são importantes."
+        },
+
+        presbiopia: {
+            title: "Presbiopia",
+            text:
+                "A presbiopia está relacionada à redução progressiva da capacidade de acomodação do olho, dificultando a focalização de objetos próximos."
+        },
+
+        ambliopia: {
+            title: "Ambliopia",
+            text:
+                "A ambliopia é uma alteração do desenvolvimento visual em que um dos olhos, ou às vezes ambos, não desenvolve adequadamente a capacidade de enxergar com nitidez."
+        },
+
+        estrabismo: {
+            title: "Estrabismo",
+            text:
+                "No estrabismo, os olhos podem não permanecer alinhados na mesma direção. Existem diferentes tipos e causas, sendo importante uma avaliação especializada."
+        }
+
+    };
+
+
+    function openModal(type) {
+
+        if (
+            !modal ||
+            !modalTitle ||
+            !modalText
+        ) return;
+
+
+        const data =
+            anomalyData[type];
+
+
+        if (!data) return;
+
+
+        modalTitle.textContent =
+            data.title;
+
+        modalText.textContent =
+            data.text;
+
+
+        modal.classList.add(
+            "active"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function closeModal() {
+
+        if (!modal) return;
+
+
+        modal.classList.remove(
+            "active"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    document
+        .querySelectorAll(
+            "[data-anomaly]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    openModal(
+                        button.dataset.anomaly
+                    );
+
+                }
+            );
+
+        });
+
+
+    if (modalClose) {
+
+        modalClose.addEventListener(
+            "click",
+            closeModal
+        );
+
+    }
+
+
+    if (modal) {
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ESC FECHA MODAL */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       FAQ
+       ===================================================== */
+
+    const faqItems =
+        document.querySelectorAll(
+            ".faq-item"
+        );
+
+
+    faqItems.forEach(item => {
+
+        const question =
+            item.querySelector(
+                ".faq-question"
+            );
+
+
+        const answer =
+            item.querySelector(
+                ".faq-answer"
+            );
+
+
+        if (!question || !answer)
+            return;
+
+
+        question.addEventListener(
+            "click",
+            () => {
+
+
+                const isActive =
+                    item.classList.contains(
+                        "active"
+                    );
+
+
+                faqItems.forEach(other => {
+
+                    other.classList.remove(
+                        "active"
+                    );
+
+
+                    const otherAnswer =
+                        other.querySelector(
+                            ".faq-answer"
+                        );
+
+
+                    if (otherAnswer) {
+
+                        otherAnswer.style.maxHeight =
+                            null;
+
+                    }
+
+                });
+
+
+                if (!isActive) {
+
+                    item.classList.add(
+                        "active"
+                    );
+
+
+                    answer.style.maxHeight =
+                        answer.scrollHeight +
+                        "px";
+
+                }
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       ANIMAÇÃO AO ENTRAR NA TELA
+       ===================================================== */
+
+    const animatedElements =
+        document.querySelectorAll(
+            ".info-card, .process-card, .anomaly-card, .glossary-card, .section-heading"
+        );
+
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.style.opacity =
+                            "1";
+
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: .12
+            }
+        );
+
+
+    animatedElements.forEach(element => {
+
+        element.style.opacity = "0";
+
+        element.style.transform =
+            "translateY(30px)";
+
+        element.style.transition =
+            "opacity .7s ease, transform .7s ease";
+
+        observer.observe(element);
+
+    });
