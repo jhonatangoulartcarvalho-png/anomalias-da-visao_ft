@@ -1323,5 +1323,42 @@ if (motionButton) {
     });
 
 }
+    // ==================================================
+// EFEITO DE DIGITAÇÃO
+// ==================================================
+
+const typingElement =
+    document.querySelector(".hero h1 span");
+
+if (typingElement) {
+
+    const originalText =
+        typingElement.textContent.trim();
+
+    typingElement.textContent = "";
+
+    let index = 0;
+
+    function typeText() {
+
+        if (index < originalText.length) {
+
+            typingElement.textContent +=
+                originalText.charAt(index);
+
+            index++;
+
+            setTimeout(
+                typeText,
+                80
+            );
+
+        }
+
+    }
+
+    typeText();
+
+}
 
 });
