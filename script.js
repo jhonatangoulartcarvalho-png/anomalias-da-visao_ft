@@ -1060,5 +1060,124 @@ mobileStyle.textContent = `
 `;
 
 document.head.appendChild(mobileStyle);
+    // ==================================================
+// LABORATÓRIO — EFEITOS VISUAIS AVANÇADOS
+// ==================================================
+
+const labPreview =
+    document.querySelector("#visionPreview");
+
+const labType =
+    document.querySelector("#visionType");
+
+const labIntensity =
+    document.querySelector("#visionIntensity");
+
+
+function applyVisionEffect() {
+
+    if (!labPreview || !labType || !labIntensity) {
+        return;
+    }
+
+    const content =
+        labPreview.querySelector(".preview-content");
+
+    if (!content) {
+        return;
+    }
+
+    const intensity =
+        Number(labIntensity.value);
+
+    const type =
+        labType.value;
+
+    content.style.transform = "";
+    content.style.filter = "";
+    content.style.textShadow = "";
+
+
+    switch (type) {
+
+        case "miopia":
+
+            content.style.filter =
+                `blur(${intensity / 10}px)`;
+
+            break;
+
+
+        case "hipermetropia":
+
+            content.style.filter =
+                `blur(${intensity / 14}px)`;
+
+            break;
+
+
+        case "astigmatismo":
+
+            content.style.filter =
+                `blur(${intensity / 16}px)`;
+
+            content.style.transform =
+                `scaleX(${1 + intensity / 1000})`;
+
+            break;
+
+
+        case "presbiopia":
+
+            content.style.filter =
+                `blur(${intensity / 12}px)`;
+
+            break;
+
+
+        case "catarata":
+
+            content.style.filter =
+                `blur(${intensity / 15}px)
+                 brightness(${1 - intensity / 250})`;
+
+            content.style.textShadow =
+                `0 0 ${intensity / 3}px rgba(255,255,255,.5)`;
+
+            break;
+
+
+        case "daltonismo":
+
+            content.style.filter =
+                `grayscale(${intensity}%)`;
+
+            break;
+
+
+        default:
+
+            content.style.filter = "none";
+            content.style.transform = "none";
+            content.style.textShadow = "none";
+
+    }
+
+}
+
+
+labType?.addEventListener(
+    "change",
+    applyVisionEffect
+);
+
+
+labIntensity?.addEventListener(
+    "input",
+    applyVisionEffect
+);
+
+
+applyVisionEffect();
 
 });
