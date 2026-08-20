@@ -1208,4 +1208,1028 @@ if (newtonDisk) {
 console.log(
     "🌈 Parte 6 carregada!"
 );
+// ==========================================
+// PARTE 7 — QUIZ
+// ==========================================
 
+const quiz =
+    document.querySelector(
+        "#quiz, .quiz, .quiz-container"
+    );
+
+
+if (quiz) {
+
+    const submitButton =
+        quiz.querySelector(
+            "button[type='submit'], .quiz-submit, #quizSubmit"
+        );
+
+
+    const result =
+        quiz.querySelector(
+            ".quiz-result, #quizResult, .result"
+        );
+
+
+    if (submitButton) {
+
+        submitButton.addEventListener(
+            "click",
+            () => {
+
+                const questions =
+                    quiz.querySelectorAll(
+                        "input[type='radio']"
+                    );
+
+
+                const groups = new Set();
+
+
+                questions.forEach(
+                    input => {
+
+                        if (input.name) {
+
+                            groups.add(
+                                input.name
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                let score = 0;
+                let answered = 0;
+
+
+                groups.forEach(
+                    name => {
+
+                        const selected =
+                            quiz.querySelector(
+                                `input[name="${name}"]:checked`
+                            );
+
+
+                        if (selected) {
+
+                            answered++;
+
+
+                            if (
+                                selected.dataset.correct ===
+                                "true"
+                            ) {
+
+                                score++;
+
+                            }
+
+                        }
+
+                    }
+                );
+
+
+                const total =
+                    groups.size;
+
+
+                if (
+                    result
+                ) {
+
+                    if (
+                        answered < total
+                    ) {
+
+                        result.textContent =
+                            `Responda todas as perguntas. (${answered}/${total})`;
+
+                        return;
+
+                    }
+
+
+                    result.innerHTML =
+                        `
+                        <strong>
+                            Resultado: ${score}/${total}
+                        </strong>
+                        <br>
+                        Você acertou
+                        ${total > 0
+                            ? Math.round(
+                                score / total * 100
+                            )
+                            : 0
+                        }%.
+                        `;
+
+                }
+
+            }
+        );
+
+    }
+
+}
+
+
+console.log(
+    "🧠 Parte 7 carregada!"
+);
+// ==========================================
+// PARTE 8 — FAQ
+// ==========================================
+
+const faqItems =
+    document.querySelectorAll(
+        ".faq-item"
+    );
+
+
+faqItems.forEach(item => {
+
+    const question =
+        item.querySelector(
+            ".faq-question, button, .faq-title"
+        );
+
+
+    const answer =
+        item.querySelector(
+            ".faq-answer, .faq-content, .faq-text"
+        );
+
+
+    if (!question) return;
+
+
+    question.addEventListener(
+        "click",
+        () => {
+
+            const isOpen =
+                item.classList.contains(
+                    "active"
+                );
+
+
+            // Fecha todos os outros
+
+            faqItems.forEach(
+                other => {
+
+                    if (
+                        other !== item
+                    ) {
+
+                        other.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            // Abre/fecha o selecionado
+
+            if (isOpen) {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            } else {
+
+                item.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            // Ajusta a altura
+
+            faqItems.forEach(
+                current => {
+
+                    const currentAnswer =
+                        current.querySelector(
+                            ".faq-answer, .faq-content, .faq-text"
+                        );
+
+
+                    if (
+                        !currentAnswer
+                    ) return;
+
+
+                    if (
+                        current.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+                        currentAnswer.style.maxHeight =
+                            currentAnswer.scrollHeight +
+                            "px";
+
+                    } else {
+
+                        currentAnswer.style.maxHeight =
+                            "0px";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+});
+
+
+console.log(
+    "❓ Parte 8 carregada!"
+);
+// ==========================================
+// PARTE 9 — PROGRESSO E CONQUISTAS
+// ==========================================
+
+
+// ==========================================
+// SISTEMA DE PROGRESSO
+// ==========================================
+
+const progressBar =
+    document.querySelector(
+        "#progressBar, .progress-bar"
+    );
+
+
+const progressText =
+    document.querySelector(
+        "#progressText, .progress-text"
+    );
+
+
+let progress =
+    Number(
+        localStorage.getItem(
+            "vision-progress"
+        )
+    ) || 0;
+
+
+function updateProgress() {
+
+    progress =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                progress
+            )
+        );
+
+
+    if (progressBar) {
+
+        progressBar.style.width =
+            progress + "%";
+
+    }
+
+
+    if (progressText) {
+
+        progressText.textContent =
+            progress + "%";
+
+    }
+
+
+    localStorage.setItem(
+        "vision-progress",
+        progress
+    );
+
+}
+
+
+updateProgress();
+
+
+// ==========================================
+// AUMENTAR PROGRESSO
+// ==========================================
+
+function addProgress(value) {
+
+    progress += value;
+
+    updateProgress();
+
+    checkAchievements();
+
+}
+
+
+// ==========================================
+// MARCAR SEÇÕES VISITADAS
+// ==========================================
+
+const visitedSections =
+    JSON.parse(
+        localStorage.getItem(
+            "vision-sections"
+        ) || "[]"
+    );
+
+
+document
+    .querySelectorAll(
+        "section[id]"
+    )
+    .forEach(section => {
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+
+                            const id =
+                                section.id;
+
+
+                            if (
+                                !visitedSections.includes(
+                                    id
+                                )
+                            ) {
+
+                                visitedSections.push(
+                                    id
+                                );
+
+
+                                localStorage.setItem(
+                                    "vision-sections",
+                                    JSON.stringify(
+                                        visitedSections
+                                    )
+                                );
+
+
+                                addProgress(5);
+
+                            }
+
+
+                            observer.unobserve(
+                                section
+                            );
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.3
+                }
+            );
+
+
+        observer.observe(
+            section
+        );
+
+    });
+
+
+// ==========================================
+// CONQUISTAS
+// ==========================================
+
+const achievements = {
+
+    explorer: {
+        name: "🔎 Explorador",
+        description:
+            "Visitou diferentes áreas do site."
+    },
+
+    scientist: {
+        name: "🧪 Cientista",
+        description:
+            "Explorou o laboratório."
+    },
+
+    quiz: {
+        name: "🧠 Conhecedor",
+        description:
+            "Concluiu o quiz."
+    },
+
+    vision: {
+        name: "👁️ Especialista em Visão",
+        description:
+            "Alcançou 100% de progresso."
+    }
+
+};
+
+
+let unlockedAchievements =
+    JSON.parse(
+        localStorage.getItem(
+            "vision-achievements"
+        ) || "[]"
+    );
+
+
+function unlockAchievement(id) {
+
+    if (
+        unlockedAchievements.includes(
+            id
+        )
+    ) {
+        return;
+    }
+
+
+    if (
+        !achievements[id]
+    ) {
+        return;
+    }
+
+
+    unlockedAchievements.push(
+        id
+    );
+
+
+    localStorage.setItem(
+        "vision-achievements",
+        JSON.stringify(
+            unlockedAchievements
+        )
+    );
+
+
+    showAchievement(
+        achievements[id]
+    );
+
+}
+
+
+// ==========================================
+// NOTIFICAÇÃO
+// ==========================================
+
+function showAchievement(
+    achievement
+) {
+
+    const notification =
+        document.createElement(
+            "div"
+        );
+
+
+    notification.className =
+        "achievement-notification";
+
+
+    notification.innerHTML = `
+        <strong>
+            🏆 Conquista desbloqueada!
+        </strong>
+        <br>
+        ${achievement.name}
+        <br>
+        <small>
+            ${achievement.description}
+        </small>
+    `;
+
+
+    document.body.appendChild(
+        notification
+    );
+
+
+    setTimeout(
+        () => {
+
+            notification.classList.add(
+                "hide"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    notification.remove();
+
+                },
+                500
+            );
+
+        },
+        4000
+    );
+
+}
+
+
+// ==========================================
+// VERIFICAR CONQUISTAS
+// ==========================================
+
+function checkAchievements() {
+
+    if (
+        visitedSections.length >= 4
+    ) {
+
+        unlockAchievement(
+            "explorer"
+        );
+
+    }
+
+
+    if (
+        document.querySelector(
+            "#visionType"
+        )
+    ) {
+
+        unlockAchievement(
+            "scientist"
+        );
+
+    }
+
+
+    if (
+        progress >= 100
+    ) {
+
+        unlockAchievement(
+            "vision"
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// QUIZ CONCLUÍDO
+// ==========================================
+
+const quizElement =
+    document.querySelector(
+        "#quiz, .quiz"
+    );
+
+
+if (quizElement) {
+
+    quizElement.addEventListener(
+        "click",
+        event => {
+
+            const button =
+                event.target.closest(
+                    "button"
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            if (
+                button.textContent
+                    .toLowerCase()
+                    .includes(
+                        "finalizar"
+                    )
+            ) {
+
+                unlockAchievement(
+                    "quiz"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+checkAchievements();
+
+
+console.log(
+    "🏆 Parte 9 carregada!"
+);
+// ==========================================
+// PARTE 10 — ASSISTENTE DE LIBRAS
+// ==========================================
+
+
+// BOTÃO DO ASSISTENTE
+
+const librasButton =
+    document.querySelector(
+        "[data-libras], #librasButton, .libras-button"
+    );
+
+
+// PAINEL
+
+const librasPanel =
+    document.querySelector(
+        ".libras-panel, #librasPanel"
+    );
+
+
+// BOTÃO FECHAR
+
+const librasClose =
+    document.querySelector(
+        ".libras-close, #librasClose"
+    );
+
+
+// ==========================================
+// ABRIR ASSISTENTE
+// ==========================================
+
+if (librasButton) {
+
+    librasButton.addEventListener(
+        "click",
+        () => {
+
+            if (!librasPanel) {
+                return;
+            }
+
+
+            librasPanel.classList.toggle(
+                "active"
+            );
+
+
+            const opened =
+                librasPanel.classList.contains(
+                    "active"
+                );
+
+
+            librasButton.setAttribute(
+                "aria-expanded",
+                opened
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// FECHAR ASSISTENTE
+// ==========================================
+
+if (librasClose) {
+
+    librasClose.addEventListener(
+        "click",
+        () => {
+
+            if (!librasPanel) {
+                return;
+            }
+
+
+            librasPanel.classList.remove(
+                "active"
+            );
+
+
+            if (librasButton) {
+
+                librasButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// FECHAR CLICANDO FORA
+// ==========================================
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if (
+            !librasPanel ||
+            !librasButton
+        ) {
+            return;
+        }
+
+
+        const clickedInside =
+            librasPanel.contains(
+                event.target
+            );
+
+
+        const clickedButton =
+            librasButton.contains(
+                event.target
+            );
+
+
+        if (
+            !clickedInside &&
+            !clickedButton
+        ) {
+
+            librasPanel.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+// ==========================================
+// ESC FECHA O ASSISTENTE
+// ==========================================
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key !== "Escape"
+        ) {
+            return;
+        }
+
+
+        if (librasPanel) {
+
+            librasPanel.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+// ==========================================
+// STATUS DO ASSISTENTE
+// ==========================================
+
+const librasStatus =
+    document.querySelector(
+        "[data-libras-status]"
+    );
+
+
+if (librasStatus) {
+
+    librasStatus.textContent =
+        "Assistente de Libras disponível";
+
+}
+
+
+console.log(
+    "🤟 Parte 10 carregada!"
+);
+// ==========================================
+// PARTE 11 — FINALIZAÇÃO
+// ==========================================
+
+
+// ==========================================
+// ANIMAÇÃO AO ENTRAR NA TELA
+// ==========================================
+
+const revealElements =
+    document.querySelectorAll(
+        ".section, .card, .anomaly-card, .info-card, .about-content"
+    );
+
+
+if (
+    "IntersectionObserver" in window
+) {
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+
+                            revealObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+
+    revealElements.forEach(
+        element => {
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// IMAGENS — ACESSIBILIDADE
+// ==========================================
+
+document
+    .querySelectorAll(
+        "img"
+    )
+    .forEach(image => {
+
+        if (
+            !image.hasAttribute(
+                "alt"
+            )
+        ) {
+
+            image.setAttribute(
+                "alt",
+                "Imagem relacionada às anomalias da visão"
+            );
+
+        }
+
+    });
+
+
+// ==========================================
+// ANO AUTOMÁTICO
+// ==========================================
+
+document
+    .querySelectorAll(
+        "[data-current-year]"
+    )
+    .forEach(element => {
+
+        element.textContent =
+            new Date().getFullYear();
+
+    });
+
+
+// ==========================================
+// PREFERÊNCIA DE MOVIMENTO
+// ==========================================
+
+const reducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+
+
+if (
+    reducedMotion.matches
+) {
+
+    document.body.classList.add(
+        "reduced-motion"
+    );
+
+}
+
+
+// ==========================================
+// TECLA ESC
+// ==========================================
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key !== "Escape"
+        ) {
+            return;
+        }
+
+
+        document
+            .querySelectorAll(
+                ".active"
+            )
+            .forEach(element => {
+
+                element.classList.remove(
+                    "active"
+                );
+
+            });
+
+    }
+);
+
+
+// ==========================================
+// STATUS FINAL
+// ==========================================
+
+console.log(
+    "================================"
+);
+
+console.log(
+    "👁️ VISÃO EM FOCO"
+);
+
+console.log(
+    "✅ JavaScript carregado"
+);
+
+console.log(
+    "✅ Sistema pronto"
+);
+
+console.log(
+    "================================"
+);
