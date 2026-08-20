@@ -2074,3 +2074,12 @@ body.reduced-motion * {
 
     z-index: 5;
 }
+nav a.active {
+
+    color: var(--primary);
+
+    text-shadow:
+        0 0 12px
+        rgba(94,231,255,.5);
+
+}
