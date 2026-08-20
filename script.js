@@ -1011,5 +1011,54 @@ anomalyCards.forEach(card => {
     );
 
 });
+    // ==================================================
+// MENU MOBILE — ESTILO
+// ==================================================
+
+const mobileStyle = document.createElement("style");
+
+mobileStyle.textContent = `
+@media (max-width: 1100px) {
+
+    nav.mobile-open {
+
+        position: absolute;
+
+        top: var(--header-height);
+
+        left: 0;
+
+        width: 100%;
+
+        padding: 25px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 20px;
+
+        background: rgba(5, 8, 22, .97);
+
+        backdrop-filter: blur(20px);
+
+        border-bottom: 1px solid var(--border);
+
+    }
+
+    nav.mobile-open a {
+
+        font-size: 15px;
+
+        padding: 8px 20px;
+
+    }
+
+}
+`;
+
+document.head.appendChild(mobileStyle);
 
 });
