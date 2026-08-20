@@ -4791,3 +4791,20 @@ footer {
     }
 
 }
+/* CORREÇÃO TEMPORÁRIA */
+body {
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+section {
+    background: transparent;
+    color: inherit;
+}
+
+.card,
+.anomaly-card,
+.info-card,
+.content-card {
+    color: #1f2937;
+}
