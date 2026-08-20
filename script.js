@@ -1,3 +1,59 @@
+// ==================================================
+// VISÃO EM FOCO — JAVASCRIPT FINAL
+// ==================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // ==================================================
+    // LOADER
+    // ==================================================
+
+    const loader = document.querySelector(".loader");
+
+    setTimeout(() => {
+        if (loader) {
+            loader.classList.add("hidden");
+        }
+    }, 900);
+
+
+    // ==================================================
+    // MENU MOBILE
+    // ==================================================
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+
+    if (menuToggle && nav) {
+
+        menuToggle.addEventListener("click", () => {
+
+            nav.classList.toggle("mobile-open");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                nav.classList.contains("mobile-open")
+            );
+
+        });
+
+
+        nav.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                nav.classList.remove("mobile-open");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            });
+
+        });
+
+    }
 
 
     // ==================================================
@@ -1311,5 +1367,29 @@ copyButtons.forEach(button => {
 
     });
 
-});
+    // ==================================================
+// DISCO DE NEWTON — GIRAR
+// ==================================================
+
+const newtonButton =
+    document.querySelector("#newtonStart");
+
+const newtonDisk =
+    document.querySelector("#newtonDisk");
+
+if (newtonButton && newtonDisk) {
+
+    newtonButton.addEventListener("click", () => {
+
+        newtonDisk.classList.toggle("spinning");
+
+        if (newtonDisk.classList.contains("spinning")) {
+            newtonButton.textContent = "⏹ Parar disco";
+        } else {
+            newtonButton.textContent = "▶ Girar disco";
+        }
+
+    });
+
+}
 });
