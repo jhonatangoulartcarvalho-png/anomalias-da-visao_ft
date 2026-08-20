@@ -4617,3 +4617,177 @@ footer {
         page-break-inside: avoid;
     }
 }
+/* =====================================================
+   BOTÃO DO VLibras
+   ===================================================== */
+
+[vw-access-button] {
+    transition: all 0.3s ease !important;
+}
+
+/* Efeito ao passar o mouse */
+[vw-access-button]:hover {
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   ACESSIBILIDADE
+   ===================================================== */
+
+.high-contrast {
+    filter: contrast(1.2);
+}
+
+
+/* =====================================================
+   ANIMAÇÃO DE ENTRADA
+   ===================================================== */
+
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
+   BOTÃO DE LIBRAS PERSONALIZADO
+   ===================================================== */
+
+.libras-button {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+
+    width: 60px;
+    height: 60px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    z-index: 9998;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.libras-button:hover {
+    transform: scale(1.1);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =====================================================
+   PAINEL DE LIBRAS
+   ===================================================== */
+
+.libras-panel {
+    position: fixed;
+
+    bottom: 100px;
+    left: 25px;
+
+    width: 320px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.25);
+
+    z-index: 9997;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.libras-panel.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+
+.libras-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+
+.libras-header h3 {
+    margin: 0;
+
+    font-size: 18px;
+}
+
+
+.libras-close {
+    border: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .libras-button {
+        width: 55px;
+        height: 55px;
+
+        bottom: 18px;
+        left: 18px;
+    }
+
+    .libras-panel {
+        left: 15px;
+        right: 15px;
+
+        bottom: 85px;
+
+        width: auto;
+    }
+
+}
