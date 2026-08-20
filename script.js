@@ -915,5 +915,101 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(
         "👁️ VISÃO EM FOCO — SITE CARREGADO!"
     );
+    // ==================================================
+// INTERAÇÃO DAS ANOMALIAS
+// ==================================================
+
+const anomalyCards =
+    document.querySelectorAll(
+        ".anomaly-card"
+    );
+
+
+anomalyCards.forEach(card => {
+
+    card.addEventListener(
+        "click",
+        () => {
+
+            anomalyCards.forEach(
+                otherCard => {
+
+                    if (
+                        otherCard !== card
+                    ) {
+
+                        otherCard.classList.remove(
+                            "selected"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            card.classList.toggle(
+                "selected"
+            );
+
+        }
+    );
+
+});
+
+
+// ==================================================
+// EFEITO DE MOVIMENTO NOS CARDS
+// ==================================================
+
+anomalyCards.forEach(card => {
+
+    card.addEventListener(
+        "mousemove",
+        event => {
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+            const x =
+                event.clientX -
+                rect.left;
+
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            const rotateX =
+                ((y / rect.height) - .5) * -6;
+
+
+            const rotateY =
+                ((x / rect.width) - .5) * 6;
+
+
+            card.style.transform =
+                `perspective(700px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateY(-5px)`;
+
+        }
+    );
+
+
+    card.addEventListener(
+        "mouseleave",
+        () => {
+
+            card.style.transform =
+                "";
+
+        }
+    );
+
+});
 
 });
