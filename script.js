@@ -418,4 +418,38 @@ if (scrollProgress) {
     );
 
 }
+    // ==================================================
+// TEMA CLARO / ESCURO
+// ==================================================
+
+const themeButton =
+    document.getElementById("themeButton");
+
+
+if (themeButton) {
+
+    themeButton.addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "light-theme"
+            );
+
+
+            const light =
+                document.body.classList.contains(
+                    "light-theme"
+                );
+
+
+            themeButton.textContent =
+                light
+                    ? "🌙"
+                    : "☀️";
+
+        }
+    );
+
+}
 });
