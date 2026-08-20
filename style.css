@@ -2391,3 +2391,279 @@ button {
         newtonSpin 1s linear infinite;
 
 }
+/* ==================================================
+   QUIZ — VISUAL
+================================================== */
+
+.quiz {
+    max-width: 900px;
+}
+
+
+/* Caixa da pergunta */
+
+.question {
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+
+.question:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(88,230,255,.25);
+
+}
+
+
+/* Número da pergunta */
+
+.question h3 {
+
+    line-height: 1.45;
+
+}
+
+
+/* Alternativas */
+
+.question label {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 8px;
+
+    padding: 13px 15px;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius: 10px;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.question label:hover {
+
+    color:
+        var(--text);
+
+    background:
+        rgba(88,230,255,.05);
+
+    border-color:
+        rgba(88,230,255,.15);
+
+}
+
+
+/* Radio */
+
+.question input[type="radio"] {
+
+    width: 17px;
+
+    height: 17px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* Botão do quiz */
+
+#quizButton {
+
+    margin-top: 10px;
+
+}
+
+
+/* Resultado */
+
+.quiz-result {
+
+    min-height: 30px;
+
+    padding: 15px 0;
+
+    font-size: 18px;
+
+    transition:
+        opacity .3s ease;
+
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+@media (max-width: 600px) {
+
+    .question {
+
+        padding: 20px;
+
+    }
+
+    .question label {
+
+        padding: 12px;
+
+    }
+
+}
+/* ==================================================
+   ACESSIBILIDADE — LIBRAS
+================================================== */
+
+.accessibility-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.accessibility-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 4px;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+}
+
+
+.accessibility-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(88,230,255,.3);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.2);
+
+}
+
+
+.libras-icon {
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.accessibility-card:hover .libras-icon {
+
+    transform:
+        scale(1.08);
+
+    box-shadow:
+        0 0 25px
+        rgba(88,230,255,.15);
+
+}
+
+
+.accessibility-card h3 {
+
+    font-size:
+        22px;
+
+}
+
+
+.accessibility-card p {
+
+    max-width:
+        650px;
+
+}
+
+
+/* ==================================================
+   RODAPÉ
+================================================== */
+
+.footer {
+
+    position: relative;
+
+}
+
+
+.footer strong {
+
+    letter-spacing:
+        1px;
+
+}
+
+
+.footer p {
+
+    font-size:
+        14px;
+
+}
+
+
+/* ==================================================
+   SELEÇÃO DE TEXTO
+================================================== */
+
+::selection {
+
+    color:
+        #031017;
+
+    background:
+        var(--primary);
+
+}
