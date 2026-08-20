@@ -2004,186 +2004,73 @@ body.reduced-motion * {
     transition-duration: 0.01ms !important;
 
 }
-/* ==================================================
-   OLHO DO LABORATÓRIO
-================================================== */
-
 .eye-drawing {
-
     position: relative;
-
     width: 260px;
     height: 150px;
-
     margin: 0 auto 30px;
 
-    background:
-        radial-gradient(
-            ellipse at center,
-            #ffffff 0%,
-            #dcecff 55%,
-            #9db7d8 100%
-        );
+    background: white;
 
-    border-radius:
-        50% 50% 50% 50% /
-        60% 60% 40% 40%;
-
-    transform:
-        rotate(0deg);
+    border-radius: 50%;
 
     box-shadow:
-        0 0 35px
-        rgba(94,231,255,.35);
+        0 0 40px rgba(94,231,255,.5);
 
     overflow: hidden;
-
 }
 
-
-/* ÍRIS */
-
 .eye-iris {
-
     position: absolute;
 
-    width: 105px;
-    height: 105px;
+    width: 100px;
+    height: 100px;
 
-    top: 22px;
-    left: 78px;
+    top: 25px;
+    left: 80px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            #050816 0 20%,
-            #142b55 21% 35%,
-            #19bfe5 36% 52%,
-            #087eae 53% 68%,
-            #052b55 69% 100%
+            #000 0 20%,
+            #06345c 21% 35%,
+            #16d9ff 36% 55%,
+            #064b80 56% 75%,
+            #02182d 76%
         );
 
-    border:
-        5px solid
-        rgba(94,231,255,.7);
-
     box-shadow:
-        0 0 25px
-        rgba(94,231,255,.65);
-
-    animation:
-        irisPulse 4s ease-in-out infinite;
-
+        0 0 25px rgba(94,231,255,.8);
 }
 
-
-/* PUPILA */
-
 .eye-pupil {
-
     position: absolute;
 
     width: 38px;
     height: 38px;
 
-    top: 29px;
-    left: 29px;
+    top: 31px;
+    left: 31px;
 
     border-radius: 50%;
 
     background: #000;
-
-    box-shadow:
-        0 0 15px
-        rgba(0,0,0,.8);
-
 }
 
-
-/* BRILHO */
-
 .eye-shine {
-
     position: absolute;
 
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
 
-    top: 45px;
-    left: 145px;
+    top: 42px;
+    left: 140px;
 
     border-radius: 50%;
 
     background: white;
 
-    opacity: .85;
-
-    filter: blur(1px);
-
     z-index: 5;
-
-}
-
-
-/* ANIMAÇÃO */
-
-@keyframes irisPulse {
-
-    0%, 100% {
-
-        transform:
-            scale(1);
-
-    }
-
-    50% {
-
-        transform:
-            scale(1.04);
-
-    }
-
-}
-
-
-/* RESPONSIVO */
-
-@media (max-width: 700px) {
-
-    .eye-drawing {
-
-        width: 220px;
-        height: 125px;
-
-    }
-
-    .eye-iris {
-
-        width: 85px;
-        height: 85px;
-
-        top: 20px;
-        left: 67px;
-
-    }
-
-    .eye-pupil {
-
-        width: 31px;
-        height: 31px;
-
-        top: 24px;
-        left: 24px;
-
-    }
-
-    .eye-shine {
-
-        top: 40px;
-        left: 122px;
-
-    }
-
 }
