@@ -1732,4 +1732,9 @@ if (themeButton) {
     );
 
 }
+    /* TESTE LOADER */
+
+.loader {
+    display: none !important;
+}
 });
