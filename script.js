@@ -967,4 +967,245 @@ updateVisionSimulation();
 console.log(
     "🧪 Parte 5 carregada!"
 );
+// ==========================================
+// PARTE 6 — DISCO DE NEWTON
+// ==========================================
+
+
+// ==========================================
+// ELEMENTOS
+// ==========================================
+
+const newtonDisk =
+    document.querySelector(
+        "#newtonDisk, .newton-disk, .disco-newton"
+    );
+
+
+const newtonStart =
+    document.querySelector(
+        "#newtonStart, #startNewton, [data-newton-start]"
+    );
+
+
+const newtonStop =
+    document.querySelector(
+        "#newtonStop, #stopNewton, [data-newton-stop]"
+    );
+
+
+const newtonReset =
+    document.querySelector(
+        "#newtonReset, #resetNewton, [data-newton-reset]"
+    );
+
+
+const newtonSpeed =
+    document.querySelector(
+        "#newtonSpeed, #speedNewton, [data-newton-speed]"
+    );
+
+
+// ==========================================
+// VELOCIDADE PADRÃO
+// ==========================================
+
+let newtonAnimationSpeed = 1;
+
+
+// ==========================================
+// INICIAR
+// ==========================================
+
+if (newtonStart) {
+
+    newtonStart.addEventListener(
+        "click",
+        () => {
+
+            if (!newtonDisk) {
+                return;
+            }
+
+
+            newtonDisk.classList.add(
+                "spinning"
+            );
+
+
+            newtonDisk.style.animationPlayState =
+                "running";
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// PARAR
+// ==========================================
+
+if (newtonStop) {
+
+    newtonStop.addEventListener(
+        "click",
+        () => {
+
+            if (!newtonDisk) {
+                return;
+            }
+
+
+            newtonDisk.style.animationPlayState =
+                "paused";
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// RESET
+// ==========================================
+
+if (newtonReset) {
+
+    newtonReset.addEventListener(
+        "click",
+        () => {
+
+            if (!newtonDisk) {
+                return;
+            }
+
+
+            newtonDisk.classList.remove(
+                "spinning"
+            );
+
+
+            newtonDisk.style.animationPlayState =
+                "paused";
+
+
+            newtonDisk.style.animationDuration =
+                "3s";
+
+
+            newtonAnimationSpeed = 1;
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// CONTROLE DE VELOCIDADE
+// ==========================================
+
+if (newtonSpeed) {
+
+    newtonSpeed.addEventListener(
+        "input",
+        () => {
+
+            if (!newtonDisk) {
+                return;
+            }
+
+
+            const value =
+                Number(
+                    newtonSpeed.value
+                );
+
+
+            /*
+             Quanto maior o valor,
+             mais rápida fica a rotação.
+            */
+
+            const duration =
+                Math.max(
+                    0.2,
+                    5 - (value / 25)
+                );
+
+
+            newtonDisk.style.animationDuration =
+                duration + "s";
+
+
+            newtonAnimationSpeed =
+                value;
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// DUPLO CLIQUE NO DISCO
+// ==========================================
+
+if (newtonDisk) {
+
+    newtonDisk.addEventListener(
+        "dblclick",
+        () => {
+
+            newtonDisk.classList.toggle(
+                "spinning"
+            );
+
+
+            if (
+                newtonDisk.classList.contains(
+                    "spinning"
+                )
+            ) {
+
+                newtonDisk.style.animationPlayState =
+                    "running";
+
+            } else {
+
+                newtonDisk.style.animationPlayState =
+                    "paused";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// ACESSIBILIDADE
+// ==========================================
+
+if (newtonDisk) {
+
+    newtonDisk.setAttribute(
+        "role",
+        "img"
+    );
+
+
+    newtonDisk.setAttribute(
+        "aria-label",
+        "Disco de Newton"
+    );
+
+}
+
+
+console.log(
+    "🌈 Parte 6 carregada!"
+);
 
