@@ -519,4 +519,183 @@ document.addEventListener(
 
 
 console.log("♿ Parte 3 carregada!");
+// ==========================================
+// PARTE 4 — INTERAÇÕES DAS SEÇÕES
+// ==========================================
+
+
+// ==========================================
+// BOTÕES DE SAIBA MAIS
+// ==========================================
+
+const moreButtons = document.querySelectorAll(
+    "button"
+);
+
+moreButtons.forEach(button => {
+
+    const text =
+        button.textContent
+            .toLowerCase()
+            .trim();
+
+    if (
+        text.includes("saiba mais") ||
+        text.includes("ver mais") ||
+        text.includes("detalhes")
+    ) {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const card =
+                    button.closest(
+                        "article, .card, .anomaly, .info-card, div"
+                    );
+
+                if (!card) return;
+
+                card.classList.toggle(
+                    "expanded"
+                );
+
+            }
+        );
+
+    }
+
+});
+
+
+// ==========================================
+// LINKS INTERNOS
+// ==========================================
+
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(link => {
+
+    link.addEventListener(
+        "click",
+        event => {
+
+            const id =
+                link.getAttribute("href");
+
+            if (
+                !id ||
+                id === "#"
+            ) return;
+
+            const target =
+                document.querySelector(id);
+
+            if (!target) return;
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+    );
+
+});
+
+
+// ==========================================
+// ANIMAÇÃO DAS SEÇÕES
+// ==========================================
+
+const sections =
+    document.querySelectorAll(
+        "section"
+    );
+
+
+if (
+    "IntersectionObserver" in window
+) {
+
+    const sectionObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "section-visible"
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.1
+            }
+        );
+
+
+    sections.forEach(
+        section => {
+
+            sectionObserver.observe(
+                section
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// ESC FECHA MENUS
+// ==========================================
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key !== "Escape"
+        ) return;
+
+
+        document
+            .querySelectorAll(
+                ".active"
+            )
+            .forEach(element => {
+
+                if (
+                    element !== document.body
+                ) {
+
+                    element.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            });
+
+    }
+);
+
+
+console.log(
+    "✨ Parte 4 carregada!"
+);
 
