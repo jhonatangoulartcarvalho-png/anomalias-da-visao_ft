@@ -1437,3 +1437,32 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+/* =====================================================
+   BOTÃO PERSONALIZADO DO VLibras
+   ===================================================== */
+
+const meuBotaoLibras =
+    document.querySelector("#librasButton");
+
+if (meuBotaoLibras) {
+
+    meuBotaoLibras.addEventListener("click", () => {
+
+        const botaoVLibras =
+            document.querySelector("[vw-access-button]");
+
+        if (botaoVLibras) {
+
+            botaoVLibras.click();
+
+        } else {
+
+            console.log(
+                "Botão do VLibras ainda não foi carregado."
+            );
+
+        }
+
+    });
+
+}
