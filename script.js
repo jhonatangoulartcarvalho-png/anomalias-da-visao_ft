@@ -4,27 +4,16 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+
+
    // ==================================================
 // LOADER
 // ==================================================
 
-const loader = document.querySelector(".loader");
+   const loader = document.querySelector(".loader");
 
 if (loader) {
-
-    window.addEventListener("load", () => {
-
-        setTimeout(() => {
-
-            loader.classList.add("hidden");
-
-            setTimeout(() => {
-                loader.style.display = "none";
-            }, 600);
-
-        }, 800);
-
-    });
+    loader.style.display = "none";
 
 }
 
