@@ -12,7 +12,12 @@
 
     <meta
         name="description"
-        content="Visão em Foco — projeto educacional interativo sobre anatomia dos olhos, anomalias da visão, física, ciência e acessibilidade."
+        content="Anomalias da Visão — projeto educacional sobre anatomia dos olhos, alterações visuais, ciência e acessibilidade."
+    >
+
+    <meta
+        name="theme-color"
+        content="#070b18"
     >
 
     <title>
@@ -51,75 +56,27 @@
 
 <body>
 
-<!-- ==================================================
-     LOADER
-================================================== -->
 
-<div class="loader">
+    <!-- ==================================================
+         HEADER
+    ================================================== -->
 
-    <div class="loader-content">
-
-        <div class="loader-eye">
-            👁️
-        </div>
-
-        <h2>
-            VISÃO EM FOCO
-        </h2>
-
-        <p>
-            Carregando experiência visual...
-        </p>
-
-        <div class="loader-bar">
-            <span></span>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ==================================================
-     HEADER
-================================================== -->
-
-<header>
-
-    <div class="header-container">
-
+    <header class="header">
 
         <a
             href="#inicio"
             class="logo"
         >
-
-            <span class="logo-icon">
-                👁️
-            </span>
+            <span class="logo-icon">◉</span>
 
             <span>
                 VISÃO
-                <strong>
-                    EM FOCO
-                </strong>
+                <strong>EM FOCO</strong>
             </span>
-
         </a>
 
 
-        <button
-            class="menu-toggle"
-            aria-label="Abrir menu"
-            aria-expanded="false"
-        >
-
-            ☰
-
-        </button>
-
-
-        <nav>
+        <nav class="nav">
 
             <a href="#inicio">
                 Início
@@ -137,20 +94,12 @@
                 Laboratório
             </a>
 
-            <a href="#newton">
-                Disco de Newton
+            <a href="#experimento">
+                Experimento
             </a>
 
             <a href="#quiz">
                 Quiz
-            </a>
-
-            <a href="#glossario">
-                Glossário
-            </a>
-
-            <a href="#faq">
-                FAQ
             </a>
 
             <a href="#sobre">
@@ -160,1245 +109,825 @@
         </nav>
 
 
-        <div class="header-actions">
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Alterar tema"
-            >
-                🌙
-            </button>
-
-            <button
-                id="accessibilityToggle"
-                aria-label="Acessibilidade"
-            >
-                ♿
-            </button>
-
-            <button
-                class="libras-button"
-                id="librasButton"
-                data-libras
-                aria-label="Assistente de Libras"
-            >
-                🤟
-            </button>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-
-<!-- ==================================================
-     PAINEL DE ACESSIBILIDADE
-================================================== -->
-
-<div
-    class="accessibility-panel"
-    id="accessibilityPanel"
->
-
-    <div class="accessibility-header">
-
-        <h3>
-            Acessibilidade
-        </h3>
-
         <button
-            class="accessibility-close"
+            class="menu-button"
+            id="menuButton"
+            aria-label="Abrir menu"
         >
-            ✕
+            ☰
         </button>
 
-    </div>
+    </header>
 
 
-    <div class="accessibility-buttons">
+    <!-- ==================================================
+         CONTEÚDO PRINCIPAL
+    ================================================== -->
 
-        <button data-font-plus>
-            A+ Aumentar fonte
-        </button>
-
-        <button data-font-minus>
-            A- Diminuir fonte
-        </button>
-
-        <button data-font-normal>
-            ↔ Fonte normal
-        </button>
-
-        <button data-contrast>
-            ◐ Alto contraste
-        </button>
-
-        <button data-speech>
-            🔊 Ler página
-        </button>
-
-    </div>
-
-</div>
+    <main>
 
 
+        <!-- ==================================================
+             HERO
+        ================================================== -->
 
-<!-- ==================================================
-     ASSISTENTE DE LIBRAS
-================================================== -->
+        <section
+            class="hero"
+            id="inicio"
+        >
 
-<div
-    class="libras-panel"
-    id="librasPanel"
->
+            <div class="hero-content">
 
-    <button
-        class="libras-close"
-        id="librasClose"
-    >
-        ✕
-    </button>
-
-    <div class="libras-icon">
-        🤟
-    </div>
-
-    <h3>
-        Assistente de Libras
-    </h3>
-
-    <p>
-        Acessibilidade em Língua Brasileira
-        de Sinais.
-    </p>
-
-    <div
-        data-libras-status
-        class="libras-status"
-    >
-        Assistente de Libras disponível
-    </div>
-
-</div>
-
-
-
-<!-- ==================================================
-     HERO
-================================================== -->
-
-<main>
-
-<section
-    class="section hero"
-    id="inicio"
->
-
-    <div class="hero-content">
-
-        <span class="section-tag">
-            PROJETO EDUCACIONAL · BIOLOGIA + FÍSICA
-        </span>
-
-        <h1>
-
-            ANOMALIAS
-            <span>
-                DA VISÃO
-            </span>
-
-        </h1>
-
-        <p class="hero-description">
-
-            Descubra como nossos olhos funcionam,
-            entenda as principais alterações visuais
-            e explore a ciência por trás da visão
-            humana.
-
-        </p>
-
-
-        <div class="hero-buttons">
-
-            <a
-                href="#anatomia"
-                class="button primary"
-            >
-                Explorar visão →
-            </a>
-
-            <a
-                href="#laboratorio"
-                class="button secondary"
-            >
-                🧪 Laboratório
-            </a>
-
-        </div>
-
-
-        <div class="hero-stats">
-
-            <div>
-
-                <strong>
-                    06+
-                </strong>
-
-                <span>
-                    Anomalias
+                <span class="section-tag">
+                    PROJETO EDUCACIONAL
                 </span>
 
-            </div>
 
+                <h1>
 
-            <div>
+                    Descubra como
+                    <span>
+                        enxergamos
+                    </span>
+                    o mundo.
 
-                <strong>
-                    09
-                </strong>
+                </h1>
 
-                <span>
-                    Seções
-                </span>
-
-            </div>
-
-
-            <div>
-
-                <strong>
-                    100%
-                </strong>
-
-                <span>
-                    Educativo
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="hero-visual">
-
-        <div class="eye-orbit orbit-1"></div>
-
-        <div class="eye-orbit orbit-2"></div>
-
-        <div class="eye-orbit orbit-3"></div>
-
-        <div class="hero-eye">
-
-            👁️
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ==================================================
-     ANATOMIA
-================================================== -->
-
-<section
-    class="section"
-    id="anatomia"
->
-
-    <div class="section-heading">
-
-        <span class="section-tag">
-            01 · ANATOMIA
-        </span>
-
-        <h2>
-            Conheça o
-            <span>
-                olho humano.
-            </span>
-        </h2>
-
-        <p>
-            O olho é um sistema biológico
-            extremamente complexo.
-        </p>
-
-    </div>
-
-
-    <div class="card-grid">
-
-        <article class="card">
-
-            <div class="card-icon">
-                👁️
-            </div>
-
-            <h3>
-                Córnea
-            </h3>
-
-            <p>
-                Estrutura transparente responsável
-                por grande parte da refração da luz.
-            </p>
-
-        </article>
-
-
-        <article class="card">
-
-            <div class="card-icon">
-                🔵
-            </div>
-
-            <h3>
-                Íris
-            </h3>
-
-            <p>
-                Controla a quantidade de luz que
-                entra no olho através da pupila.
-            </p>
-
-        </article>
-
-
-        <article class="card">
-
-            <div class="card-icon">
-                🔬
-            </div>
-
-            <h3>
-                Cristalino
-            </h3>
-
-            <p>
-                Lente natural que ajuda a focalizar
-                imagens na retina.
-            </p>
-
-        </article>
-
-
-        <article class="card">
-
-            <div class="card-icon">
-                ⚡
-            </div>
-
-            <h3>
-                Retina
-            </h3>
-
-            <p>
-                Converte a luz em sinais nervosos
-                enviados ao cérebro.
-            </p>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-
-<!-- ==================================================
-     ANOMALIAS
-================================================== -->
-
-<section
-    class="section"
-    id="anomalias"
->
-
-    <div class="section-heading">
-
-        <span class="section-tag">
-            03 · ANOMALIAS DA VISÃO
-        </span>
-
-        <h2>
-            Quando a visão
-            <span>
-                muda.
-            </span>
-        </h2>
-
-        <p>
-            Conheça alterações visuais comuns
-            e entenda como elas afetam a formação
-            das imagens.
-        </p>
-
-    </div>
-
-
-    <div class="anomaly-grid">
-
-
-        <article
-            class="anomaly-card"
-            data-category="refracao"
-        >
-
-            <div class="anomaly-icon">
-                🔭
-            </div>
-
-            <span class="anomaly-number">
-                01
-            </span>
-
-            <h3>
-                Miopia
-            </h3>
-
-            <p>
-                Dificuldade para enxergar objetos
-                distantes com nitidez.
-            </p>
-
-            <span class="anomaly-tag">
-                REFRAÇÃO
-            </span>
-
-        </article>
-
-
-        <article
-            class="anomaly-card"
-            data-category="refracao"
-        >
-
-            <div class="anomaly-icon">
-                🔎
-            </div>
-
-            <span class="anomaly-number">
-                02
-            </span>
-
-            <h3>
-                Hipermetropia
-            </h3>
-
-            <p>
-                Pode dificultar principalmente
-                a visão de objetos próximos.
-            </p>
-
-            <span class="anomaly-tag">
-                REFRAÇÃO
-            </span>
-
-        </article>
-
-
-        <article
-            class="anomaly-card"
-            data-category="refracao"
-        >
-
-            <div class="anomaly-icon">
-                🌀
-            </div>
-
-            <span class="anomaly-number">
-                03
-            </span>
-
-            <h3>
-                Astigmatismo
-            </h3>
-
-            <p>
-                Pode causar visão distorcida
-                ou desfocada.
-            </p>
-
-            <span class="anomaly-tag">
-                REFRAÇÃO
-            </span>
-
-        </article>
-
-
-        <article
-            class="anomaly-card"
-            data-category="idade"
-        >
-
-            <div class="anomaly-icon">
-                👓
-            </div>
-
-            <span class="anomaly-number">
-                04
-            </span>
-
-            <h3>
-                Presbiopia
-            </h3>
-
-            <p>
-                Alteração relacionada ao envelhecimento
-                que afeta a visão de perto.
-            </p>
-
-            <span class="anomaly-tag">
-                IDADE
-            </span>
-
-        </article>
-
-
-        <article
-            class="anomaly-card"
-            data-category="doenca"
-        >
-
-            <div class="anomaly-icon">
-                🌫️
-            </div>
-
-            <span class="anomaly-number">
-                05
-            </span>
-
-            <h3>
-                Catarata
-            </h3>
-
-            <p>
-                Opacificação do cristalino que pode
-                reduzir a nitidez da visão.
-            </p>
-
-            <span class="anomaly-tag">
-                OCULAR
-            </span>
-
-        </article>
-
-
-        <article
-            class="anomaly-card"
-            data-category="cor"
-        >
-
-            <div class="anomaly-icon">
-                🎨
-            </div>
-
-            <span class="anomaly-number">
-                06
-            </span>
-
-            <h3>
-                Daltonismo
-            </h3>
-
-            <p>
-                Alteração na percepção de determinadas
-                cores.
-            </p>
-
-            <span class="anomaly-tag">
-                CORES
-            </span>
-
-        </article>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- ==================================================
-     LABORATÓRIO
-================================================== -->
-
-<section
-    class="section laboratory"
-    id="laboratorio"
->
-
-    <div class="section-heading">
-
-        <span class="section-tag">
-            04 · LABORATÓRIO
-        </span>
-
-        <h2>
-            Experimente
-            <span>
-                diferentes visões.
-            </span>
-        </h2>
-
-        <p>
-            Selecione uma condição e ajuste
-            sua intensidade.
-        </p>
-
-    </div>
-
-
-    <div class="lab-container">
-
-
-        <div class="lab-controls">
-
-            <label for="visionType">
-                Condição visual
-            </label>
-
-            <select id="visionType">
-
-                <option value="normal">
-                    Visão normal
-                </option>
-
-                <option value="miopia">
-                    Miopia
-                </option>
-
-                <option value="hipermetropia">
-                    Hipermetropia
-                </option>
-
-                <option value="astigmatismo">
-                    Astigmatismo
-                </option>
-
-                <option value="presbiopia">
-                    Presbiopia
-                </option>
-
-                <option value="catarata">
-                    Catarata
-                </option>
-
-                <option value="daltonismo">
-                    Daltonismo
-                </option>
-
-            </select>
-
-
-            <label for="visionIntensity">
-                Intensidade:
-                <span id="intensityValue">
-                    50%
-                </span>
-            </label>
-
-            <input
-                type="range"
-                id="visionIntensity"
-                min="0"
-                max="100"
-                value="50"
-            >
-
-
-            <button
-                class="button secondary"
-                id="resetVision"
-            >
-                ↻ Resetar
-            </button>
-
-        </div>
-
-
-        <div
-            class="vision-preview"
-            id="visionPreview"
-        >
-
-            <div class="preview-content">
-
-                <span>
-                    👁️
-                </span>
-
-                <h3>
-                    VISÃO EM FOCO
-                </h3>
 
                 <p>
-                    Esta área simula diferentes
-                    condições visuais.
+
+                    Uma experiência interativa para
+                    entender o funcionamento dos olhos,
+                    as principais anomalias da visão
+                    e a ciência por trás delas.
+
                 </p>
 
-            </div>
 
-        </div>
+                <div class="hero-buttons">
 
-    </div>
+                    <a
+                        href="#anatomia"
+                        class="button primary"
+                    >
+                        Explorar o olho →
+                    </a>
 
-</section>
+                    <a
+                        href="#laboratorio"
+                        class="button secondary"
+                    >
+                        Experimentar
+                    </a>
 
-
-
-<!-- ==================================================
-     DISCO DE NEWTON
-================================================== -->
-
-<section
-    class="section"
-    id="newton"
->
-
-    <div class="section-heading">
-
-        <span class="section-tag">
-            05 · FÍSICA
-        </span>
-
-        <h2>
-            Disco de
-            <span>
-                Newton.
-            </span>
-        </h2>
-
-        <p>
-            Observe como as cores podem se combinar
-            quando o disco gira rapidamente.
-        </p>
-
-    </div>
-
-
-    <div class="newton-container">
-
-
-        <div class="newton-stage">
-
-            <div
-                class="newton-disk"
-                id="newtonDisk"
-            >
-
-                <div class="disk-center">
-                    👁️
                 </div>
 
             </div>
 
-        </div>
+
+            <div class="hero-eye">
+
+                <div class="eye-outer">
+
+                    <div class="eye-iris">
+
+                        <div class="eye-pupil"></div>
+
+                    </div>
+
+                    <div class="eye-reflection"></div>
+
+                </div>
+
+            </div>
+
+        </section>
 
 
-        <div class="newton-controls">
+        <!-- ==================================================
+             ANATOMIA
+        ================================================== -->
 
-            <button
-                class="button primary"
-                id="newtonStart"
-            >
-                ▶ Girar
-            </button>
-
-            <button
-                class="button secondary"
-                id="newtonStop"
-            >
-                ⏸ Parar
-            </button>
-
-            <button
-                class="button secondary"
-                id="newtonReset"
-            >
-                ↻ Resetar
-            </button>
-
-
-            <label>
-                Velocidade
-            </label>
-
-            <input
-                type="range"
-                id="newtonSpeed"
-                min="1"
-                max="100"
-                value="50"
-            >
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ==================================================
-     QUIZ
-================================================== -->
-
-<section
-    class="section"
-    id="quiz"
->
-
-    <div class="section-heading">
-
-        <span class="section-tag">
-            06 · DESAFIO
-        </span>
-
-        <h2>
-            Teste seus
-            <span>
-                conhecimentos.
-            </span>
-        </h2>
-
-    </div>
-
-
-    <form class="quiz">
-
-
-        <div class="quiz-question">
-
-            <h3>
-                1. Onde se formam os sinais
-                nervosos relacionados à luz?
-            </h3>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q1"
-                    data-correct="true"
-                >
-                Retina
-            </label>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q1"
-                >
-                Íris
-            </label>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q1"
-                >
-                Córnea
-            </label>
-
-        </div>
-
-
-        <div class="quiz-question">
-
-            <h3>
-                2. Qual alteração costuma
-                dificultar a visão de longe?
-            </h3>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q2"
-                    data-correct="true"
-                >
-                Miopia
-            </label>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q2"
-                >
-                Presbiopia
-            </label>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q2"
-                >
-                Catarata
-            </label>
-
-        </div>
-
-
-        <div class="quiz-question">
-
-            <h3>
-                3. O que o Disco de Newton
-                demonstra?
-            </h3>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q3"
-                    data-correct="true"
-                >
-                A combinação das cores
-            </label>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q3"
-                >
-                A formação da retina
-            </label>
-
-            <label>
-                <input
-                    type="radio"
-                    name="q3"
-                >
-                O funcionamento da pupila
-            </label>
-
-        </div>
-
-
-        <button
-            type="button"
-            class="button primary"
-            id="quizSubmit"
+        <section
+            class="section"
+            id="anatomia"
         >
-            Finalizar quiz
-        </button>
 
+            <div class="section-heading">
 
-        <div
-            class="quiz-result"
-            id="quizResult"
-        ></div>
+                <span class="section-tag">
+                    01 · ANATOMIA
+                </span>
 
-
-    </form>
-
-</section>
-
-
-
-<!-- ==================================================
-     GLOSSÁRIO
-================================================== -->
-
-<section
-    class="section"
-    id="glossario"
->
-
-    <div class="section-heading">
-
-        <span class="section-tag">
-            07 · GLOSSÁRIO
-        </span>
-
-        <h2>
-            Termos
-            <span>
-                importantes.
-            </span>
-        </h2>
-
-    </div>
-
-
-    <div class="card-grid">
-
-        <article class="card">
-
-            <h3>
-                Refração
-            </h3>
-
-            <p>
-                Mudança na direção da luz ao passar
-                de um meio para outro.
-            </p>
-
-        </article>
-
-
-        <article class="card">
-
-            <h3>
-                Retina
-            </h3>
-
-            <p>
-                Camada do olho que recebe a luz
-                e participa da formação dos sinais.
-            </p>
-
-        </article>
-
-
-        <article class="card">
-
-            <h3>
-                Cristalino
-            </h3>
-
-            <p>
-                Lente natural responsável por ajudar
-                na focalização das imagens.
-            </p>
-
-        </article>
-
-
-        <article class="card">
-
-            <h3>
-                Pupila
-            </h3>
-
-            <p>
-                Abertura central da íris por onde
-                a luz entra no olho.
-            </p>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-
-<!-- ==================================================
-     FAQ
-================================================== -->
-
-<section
-    class="section"
-    id="faq"
->
-
-    <div class="section-heading">
-
-        <span class="section-tag">
-            08 · FAQ
-        </span>
-
-        <h2>
-            Perguntas
-            <span>
-                frequentes.
-            </span>
-        </h2>
-
-    </div>
-
-
-    <div class="faq-list">
-
-
-        <div class="faq-item">
-
-            <button
-                class="faq-question"
-            >
-                O que são anomalias da visão?
-                <span>+</span>
-            </button>
-
-            <div class="faq-answer">
+                <h2>
+                    Como funciona
+                    <span>
+                        o olho humano?
+                    </span>
+                </h2>
 
                 <p>
-                    São alterações que podem afetar
-                    a forma como o sistema visual
-                    percebe ou focaliza imagens.
+                    Conheça as principais estruturas
+                    responsáveis pela formação da visão.
                 </p>
 
             </div>
 
-        </div>
+
+            <div class="anatomy-grid">
 
 
-        <div class="faq-item">
+                <article class="info-card">
 
-            <button
-                class="faq-question"
-            >
-                Miopia tem tratamento?
-                <span>+</span>
-            </button>
+                    <div class="card-number">
+                        01
+                    </div>
 
-            <div class="faq-answer">
+                    <h3>
+                        Córnea
+                    </h3>
+
+                    <p>
+                        Primeira estrutura que a luz
+                        atravessa. Ela ajuda a direcionar
+                        os raios luminosos para dentro
+                        do olho.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="card-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Íris
+                    </h3>
+
+                    <p>
+                        Parte colorida do olho que
+                        controla a quantidade de luz
+                        que entra pela pupila.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="card-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Cristalino
+                    </h3>
+
+                    <p>
+                        Estrutura transparente que
+                        altera seu formato para ajudar
+                        a focalizar objetos.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="card-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Retina
+                    </h3>
+
+                    <p>
+                        Camada sensível à luz que
+                        transforma estímulos luminosos
+                        em sinais enviados ao cérebro.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="card-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Nervo óptico
+                    </h3>
+
+                    <p>
+                        Transporta as informações
+                        visuais da retina até o cérebro.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="card-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Pupila
+                    </h3>
+
+                    <p>
+                        Abertura localizada no centro
+                        da íris por onde a luz entra
+                        no olho.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             ANOMALIAS
+        ================================================== -->
+
+        <section
+            class="section section-dark"
+            id="anomalias"
+        >
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    02 · ANOMALIAS
+                </span>
+
+                <h2>
+                    Quando a visão
+                    <span>
+                        muda.
+                    </span>
+                </h2>
 
                 <p>
-                    Existem formas de correção e
-                    acompanhamento que devem ser
-                    indicadas por profissionais de saúde.
+                    Conheça algumas das principais
+                    alterações visuais.
                 </p>
 
             </div>
 
-        </div>
+
+            <div class="anomaly-grid">
 
 
-        <div class="faq-item">
+                <article class="anomaly-card">
 
-            <button
-                class="faq-question"
-            >
-                Por que devemos cuidar da visão?
-                <span>+</span>
-            </button>
+                    <span class="anomaly-icon">
+                        👓
+                    </span>
 
-            <div class="faq-answer">
+                    <h3>
+                        Miopia
+                    </h3>
+
+                    <p>
+                        Dificuldade para enxergar
+                        objetos que estão distantes.
+                    </p>
+
+                </article>
+
+
+                <article class="anomaly-card">
+
+                    <span class="anomaly-icon">
+                        🔍
+                    </span>
+
+                    <h3>
+                        Hipermetropia
+                    </h3>
+
+                    <p>
+                        Pode causar dificuldade para
+                        focalizar objetos próximos.
+                    </p>
+
+                </article>
+
+
+                <article class="anomaly-card">
+
+                    <span class="anomaly-icon">
+                        ◌
+                    </span>
+
+                    <h3>
+                        Astigmatismo
+                    </h3>
+
+                    <p>
+                        Pode provocar visão distorcida
+                        ou desfocada em diferentes
+                        distâncias.
+                    </p>
+
+                </article>
+
+
+                <article class="anomaly-card">
+
+                    <span class="anomaly-icon">
+                        👁️
+                    </span>
+
+                    <h3>
+                        Presbiopia
+                    </h3>
+
+                    <p>
+                        Alteração relacionada à idade
+                        que dificulta o foco de perto.
+                    </p>
+
+                </article>
+
+
+                <article class="anomaly-card">
+
+                    <span class="anomaly-icon">
+                        🌫️
+                    </span>
+
+                    <h3>
+                        Catarata
+                    </h3>
+
+                    <p>
+                        Opacificação do cristalino que
+                        pode deixar a visão embaçada.
+                    </p>
+
+                </article>
+
+
+                <article class="anomaly-card">
+
+                    <span class="anomaly-icon">
+                        🎨
+                    </span>
+
+                    <h3>
+                        Daltonismo
+                    </h3>
+
+                    <p>
+                        Alteração na percepção de
+                        determinadas cores.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             LABORATÓRIO
+        ================================================== -->
+
+        <section
+            class="section"
+            id="laboratorio"
+        >
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    03 · LABORATÓRIO
+                </span>
+
+                <h2>
+                    Experimente
+                    <span>
+                        diferentes visões.
+                    </span>
+                </h2>
 
                 <p>
-                    A visão participa de diversas
-                    atividades do cotidiano e merece
-                    acompanhamento adequado.
+                    Escolha uma condição visual
+                    e ajuste sua intensidade.
                 </p>
 
             </div>
 
-        </div>
+
+            <div class="laboratory">
 
 
-    </div>
+                <div class="lab-controls">
 
-</section>
+                    <label for="visionType">
+                        Condição visual
+                    </label>
+
+                    <select id="visionType">
+
+                        <option value="normal">
+                            Visão normal
+                        </option>
+
+                        <option value="miopia">
+                            Miopia
+                        </option>
+
+                        <option value="hipermetropia">
+                            Hipermetropia
+                        </option>
+
+                        <option value="astigmatismo">
+                            Astigmatismo
+                        </option>
+
+                        <option value="presbiopia">
+                            Presbiopia
+                        </option>
+
+                        <option value="catarata">
+                            Catarata
+                        </option>
+
+                        <option value="daltonismo">
+                            Daltonismo
+                        </option>
+
+                    </select>
 
 
+                    <label for="visionIntensity">
 
-<!-- ==================================================
-     SOBRE
-================================================== -->
+                        Intensidade:
 
-<section
-    class="section about-section"
-    id="sobre"
->
+                        <strong id="intensityValue">
+                            50%
+                        </strong>
 
-    <div class="about-content">
+                    </label>
 
-        <span class="section-tag">
-            09 · SOBRE O PROJETO
-        </span>
 
-        <h2>
-            Ciência,
-            <span>
-                tecnologia
-            </span>
-            e inclusão.
-        </h2>
+                    <input
+                        type="range"
+                        id="visionIntensity"
+                        min="0"
+                        max="100"
+                        value="50"
+                    >
+
+
+                    <button
+                        class="button secondary"
+                        id="resetVision"
+                        type="button"
+                    >
+                        ↻ Resetar
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="vision-preview"
+                    id="visionPreview"
+                >
+
+                    <div class="preview-content">
+
+                        <div class="preview-eye">
+
+                            <div class="preview-iris">
+
+                                <div class="preview-pupil"></div>
+
+                            </div>
+
+                        </div>
+
+                        <h3>
+                            VISÃO EM FOCO
+                        </h3>
+
+                        <p>
+                            Escolha uma condição
+                            para visualizar a simulação.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             EXPERIMENTO
+        ================================================== -->
+
+        <section
+            class="section section-dark"
+            id="experimento"
+        >
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    04 · EXPERIMENTO
+                </span>
+
+                <h2>
+                    Disco de
+                    <span>
+                        Newton.
+                    </span>
+                </h2>
+
+                <p>
+                    Observe como diferentes cores
+                    podem produzir a percepção do branco.
+                </p>
+
+            </div>
+
+
+            <div class="newton-container">
+
+                <div
+                    class="newton-disk"
+                    id="newtonDisk"
+                >
+
+                    <div class="disk-center"></div>
+
+                </div>
+
+
+                <button
+                    class="button primary"
+                    id="newtonButton"
+                    type="button"
+                >
+                    ▶ Girar disco
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             QUIZ
+        ================================================== -->
+
+        <section
+            class="section"
+            id="quiz"
+        >
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    05 · QUIZ
+                </span>
+
+                <h2>
+                    Teste seus
+                    <span>
+                        conhecimentos.
+                    </span>
+                </h2>
+
+                <p>
+                    Veja quanto você aprendeu
+                    sobre a visão.
+                </p>
+
+            </div>
+
+
+            <div class="quiz-container">
+
+
+                <div class="quiz-question">
+
+                    <h3>
+                        1. Qual estrutura recebe
+                        os estímulos luminosos?
+                    </h3>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q1"
+                            value="a"
+                        >
+                        Córnea
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q1"
+                            value="b"
+                            data-correct="true"
+                        >
+                        Retina
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q1"
+                            value="c"
+                        >
+                        Íris
+                    </label>
+
+                </div>
+
+
+                <div class="quiz-question">
+
+                    <h3>
+                        2. Qual alteração costuma
+                        dificultar a visão de longe?
+                    </h3>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q2"
+                            value="a"
+                            data-correct="true"
+                        >
+                        Miopia
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q2"
+                            value="b"
+                        >
+                        Presbiopia
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q2"
+                            value="c"
+                        >
+                        Catarata
+                    </label>
+
+                </div>
+
+
+                <div class="quiz-question">
+
+                    <h3>
+                        3. Qual estrutura controla
+                        a quantidade de luz que entra?
+                    </h3>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q3"
+                            value="a"
+                            data-correct="true"
+                        >
+                        Íris
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q3"
+                            value="b"
+                        >
+                        Retina
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="q3"
+                            value="c"
+                        >
+                        Nervo óptico
+                    </label>
+
+                </div>
+
+
+                <button
+                    class="button primary"
+                    id="quizSubmit"
+                    type="button"
+                >
+                    Ver resultado
+                </button>
+
+
+                <div
+                    class="quiz-result"
+                    id="quizResult"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             SOBRE
+        ================================================== -->
+
+        <section
+            class="section section-dark"
+            id="sobre"
+        >
+
+            <div class="about-content">
+
+                <span class="section-tag">
+                    06 · SOBRE O PROJETO
+                </span>
+
+                <h2>
+                    Ciência,
+                    <span>
+                        tecnologia
+                    </span>
+                    e inclusão.
+                </h2>
+
+                <p>
+                    O projeto Anomalias da Visão foi
+                    desenvolvido para apresentar
+                    conhecimentos sobre o sistema visual
+                    de maneira interativa e acessível.
+                </p>
+
+                <p>
+                    A proposta combina Biologia, Física,
+                    Tecnologia e Acessibilidade para
+                    criar uma experiência de aprendizagem.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="footer">
 
         <p>
-            O projeto Visão em Foco foi desenvolvido
-            com o objetivo de apresentar conceitos
-            científicos de forma interativa,
-            acessível e visualmente atrativa.
+            © 2026 Visão em Foco
         </p>
 
         <p>
-            A proposta combina Biologia, Física,
-            Tecnologia e Acessibilidade Digital
-            para criar uma experiência de aprendizagem.
+            Projeto educacional
         </p>
 
-    </div>
-
-</section>
+    </footer>
 
 
-</main>
+    <!-- JAVASCRIPT -->
 
-
-
-<!-- ==================================================
-     VOLTAR AO TOPO
-================================================== -->
-
-<button
-    class="back-to-top"
-    id="backToTop"
-    data-top
-    aria-label="Voltar ao topo"
->
-    ↑
-</button>
-
-
-
-<!-- ==================================================
-     FOOTER
-================================================== -->
-
-<footer>
-
-    <div class="footer-content">
-
-        <div>
-
-            <strong>
-                👁️ VISÃO EM FOCO
-            </strong>
-
-            <p>
-                Ciência, visão e inclusão.
-            </p>
-
-        </div>
-
-
-        <div>
-
-            <span>
-                Projeto educacional
-            </span>
-
-            <span>
-                © <span data-current-year></span>
-            </span>
-
-        </div>
-
-    </div>
-
-</footer>
-
-
-
-<!-- ==================================================
-     JAVASCRIPT
-================================================== -->
-
-<script
-    src="script.js"
-></script>
-
+    <script
+        src="script.js"
+    ></script>
 
 </body>
 
