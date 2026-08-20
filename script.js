@@ -1360,4 +1360,944 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     }
+           /* =====================================================
+       DISCO DE NEWTON
+       ===================================================== */
+
+    const newtonDisk =
+        document.querySelector(".newton-disk");
+
+    const newtonStart =
+        document.querySelector("#newtonStart");
+
+    const newtonStop =
+        document.querySelector("#newtonStop");
+
+    const newtonSpeed =
+        document.querySelector("#newtonSpeed");
+
+    const newtonSpeedValue =
+        document.querySelector("#newtonSpeedValue");
+
+
+    let newtonAnimation = null;
+
+
+    function startNewtonDisk() {
+
+        if (!newtonDisk) return;
+
+        newtonDisk.classList.add(
+            "spinning"
+        );
+
+    }
+
+
+    function stopNewtonDisk() {
+
+        if (!newtonDisk) return;
+
+        newtonDisk.classList.remove(
+            "spinning"
+        );
+
+    }
+
+
+    if (newtonStart) {
+
+        newtonStart.addEventListener(
+            "click",
+            startNewtonDisk
+        );
+
+    }
+
+
+    if (newtonStop) {
+
+        newtonStop.addEventListener(
+            "click",
+            stopNewtonDisk
+        );
+
+    }
+
+
+    if (
+        newtonSpeed &&
+        newtonDisk
+    ) {
+
+        newtonSpeed.addEventListener(
+            "input",
+            () => {
+
+                const speed =
+                    Number(
+                        newtonSpeed.value
+                    );
+
+
+                if (newtonSpeedValue) {
+
+                    newtonSpeedValue.textContent =
+                        speed + "%";
+
+                }
+
+
+                const duration =
+                    Math.max(
+                        .2,
+                        3 - speed / 40
+                    );
+
+
+                newtonDisk.style.animationDuration =
+                    duration + "s";
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       QUIZ
+       ===================================================== */
+
+    const quizForm =
+        document.querySelector(
+            "#visionQuiz"
+        );
+
+    const quizResult =
+        document.querySelector(
+            ".quiz-result"
+        );
+
+
+    const quizAnswers = {
+
+        q1: "b",
+        q2: "a",
+        q3: "c",
+        q4: "b",
+        q5: "a"
+
+    };
+
+
+    if (quizForm) {
+
+        quizForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+
+                let score = 0;
+
+                let answered = 0;
+
+
+                Object.keys(
+                    quizAnswers
+                ).forEach(question => {
+
+                    const selected =
+                        quizForm.querySelector(
+                            `input[name="${question}"]:checked`
+                        );
+
+
+                    if (selected) {
+
+                        answered++;
+
+
+                        if (
+                            selected.value ===
+                            quizAnswers[question]
+                        ) {
+
+                            score++;
+
+                        }
+
+                    }
+
+                });
+
+
+                if (!quizResult)
+                    return;
+
+
+                if (answered === 0) {
+
+                    quizResult.textContent =
+                        "⚠️ Responda às questões antes de finalizar.";
+
+                    quizResult.style.color =
+                        "#ffcc00";
+
+                    return;
+
+                }
+
+
+                const percentage =
+                    Math.round(
+                        (score / 5) * 100
+                    );
+
+
+                let message = "";
+
+
+                if (percentage === 100) {
+
+                    message =
+                        "🏆 Excelente! Você acertou tudo!";
+
+                }
+
+                else if (percentage >= 80) {
+
+                    message =
+                        "🔥 Muito bom! Você domina o assunto.";
+
+                }
+
+                else if (percentage >= 60) {
+
+                    message =
+                        "👏 Bom trabalho! Você está no caminho certo.";
+
+                }
+
+                else if (percentage >= 40) {
+
+                    message =
+                        "📚 Você já sabe algumas coisas, mas pode estudar mais.";
+
+                }
+
+                else {
+
+                    message =
+                        "💡 Continue estudando! O conhecimento sobre visão é importante.";
+
+                }
+
+
+                quizResult.innerHTML = `
+                    <strong>${message}</strong>
+                    <br>
+                    <span>
+                        Você acertou
+                        ${score} de 5 questões
+                        (${percentage}%).
+                    </span>
+                `;
+
+
+                quizResult.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       BOTÃO REINICIAR QUIZ
+       ===================================================== */
+
+    const resetQuiz =
+        document.querySelector(
+            "#resetQuiz"
+        );
+
+
+    if (
+        resetQuiz &&
+        quizForm &&
+        quizResult
+    ) {
+
+        resetQuiz.addEventListener(
+            "click",
+            () => {
+
+                quizForm.reset();
+
+                quizResult.innerHTML =
+                    "Responda às questões para descobrir sua pontuação.";
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       EFEITO DE CONTAGEM DOS NÚMEROS
+       ===================================================== */
+
+    const counters =
+        document.querySelectorAll(
+            "[data-counter]"
+        );
+
+
+    function animateCounter(
+        element
+    ) {
+
+        const target =
+            Number(
+                element.dataset.counter
+            );
+
+
+        let current = 0;
+
+        const duration = 1200;
+
+        const start =
+            performance.now();
+
+
+        function update(time) {
+
+            const progress =
+                Math.min(
+                    (time - start) /
+                    duration,
+                    1
+                );
+
+
+            current =
+                Math.floor(
+                    progress * target
+                );
+
+
+            element.textContent =
+                current;
+
+
+            if (progress < 1) {
+
+                requestAnimationFrame(
+                    update
+                );
+
+            }
+
+        }
+
+
+        requestAnimationFrame(
+            update
+        );
+
+    }
+
+
+    const counterObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        animateCounter(
+                            entry.target
+                        );
+
+                        counterObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: .5
+            }
+        );
+
+
+    counters.forEach(counter => {
+
+        counterObserver.observe(
+            counter
+        );
+    /* =====================================================
+       PARTE 5 — EXPERIÊNCIA AVANÇADA
+       ===================================================== */
+
+
+    /* =====================================================
+       MENU ATIVO CONFORME A SEÇÃO
+       ===================================================== */
+
+    const sections =
+        document.querySelectorAll(
+            "section[id]"
+        );
+
+    const navigationLinks =
+        document.querySelectorAll(
+            ".nav a[href^='#']"
+        );
+
+
+    function updateActiveNavigation() {
+
+        let currentSection = "";
+
+        sections.forEach(section => {
+
+            const sectionTop =
+                section.offsetTop - 180;
+
+            const sectionHeight =
+                section.offsetHeight;
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY <
+                sectionTop + sectionHeight
+            ) {
+
+                currentSection =
+                    section.id;
+
+            }
+
+        });
+
+
+        navigationLinks.forEach(link => {
+
+            link.classList.remove(
+                "active"
+            );
+
+
+            const target =
+                link.getAttribute(
+                    "href"
+                );
+
+
+            if (
+                target ===
+                "#" + currentSection
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateActiveNavigation
+    );
+
+
+    updateActiveNavigation();
+
+
+    /* =====================================================
+       EFEITO 3D NOS CARDS
+       ===================================================== */
+
+    const interactiveCards =
+        document.querySelectorAll(
+            ".anomaly-card, .info-card, .process-card, .glossary-card"
+        );
+
+
+    interactiveCards.forEach(card => {
+
+        card.addEventListener(
+            "mousemove",
+            event => {
+
+                if (
+                    window.innerWidth < 900
+                ) return;
+
+
+                const rect =
+                    card.getBoundingClientRect();
+
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+
+                const centerX =
+                    rect.width / 2;
+
+
+                const centerY =
+                    rect.height / 2;
+
+
+                const rotateX =
+                    ((y - centerY) /
+                    centerY) * -3;
+
+
+                const rotateY =
+                    ((x - centerX) /
+                    centerX) * 3;
+
+
+                card.style.transform =
+                    `
+                    perspective(800px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-5px)
+                    `;
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                card.style.transform =
+                    "";
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       EFEITO DE REVELAÇÃO
+       ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            "[data-reveal]"
+        );
+
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "revealed"
+                        );
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: .15
+            }
+        );
+
+
+    revealElements.forEach(element => {
+
+        revealObserver.observe(
+            element
+        );
+
+    });
+
+
+    /* =====================================================
+       ATALHOS DE TECLADO
+       ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            /* ALT + H = voltar ao topo */
+
+            if (
+                event.altKey &&
+                event.key.toLowerCase() === "h"
+            ) {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+
+
+            /* ALT + A = acessibilidade */
+
+            if (
+                event.altKey &&
+                event.key.toLowerCase() === "a"
+            ) {
+
+                if (
+                    accessibilityPanel
+                ) {
+
+                    accessibilityPanel.classList.toggle(
+                        "active"
+                    );
+
+                }
+
+            }
+
+
+            /* ESC = fecha menu */
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                if (nav) {
+
+                    nav.classList.remove(
+                        "active"
+                    );
+
+                }
+
+                if (
+                    accessibilityPanel
+                ) {
+
+                    accessibilityPanel.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       FECHAR MENU AO REDIMENSIONAR
+       ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            if (
+                window.innerWidth > 800 &&
+                nav
+            ) {
+
+                nav.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       ANO AUTOMÁTICO
+       ===================================================== */
+
+    const currentYear =
+        new Date().getFullYear();
+
+
+    document
+        .querySelectorAll(
+            "[data-current-year]"
+        )
+        .forEach(element => {
+
+            element.textContent =
+                currentYear;
+
+        });
+
+
+    /* =====================================================
+       INDICADOR DE STATUS
+       ===================================================== */
+
+    const systemStatus =
+        document.querySelector(
+            "[data-system-status]"
+        );
+
+
+    if (systemStatus) {
+
+        systemStatus.textContent =
+            "SISTEMA ONLINE";
+
+        systemStatus.classList.add(
+            "online"
+        );
+
+    }
+
+
+    /* =====================================================
+       BOTÕES COM DATA-SCROLL
+       ===================================================== */
+
+    document
+        .querySelectorAll(
+            "[data-scroll]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const targetId =
+                        button.dataset.scroll;
+
+
+                    const target =
+                        document.getElementById(
+                            targetId
+                        );
+
+
+                    if (target) {
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       PROTEÇÃO DE IMAGENS
+       ===================================================== */
+
+    document
+        .querySelectorAll("img")
+        .forEach(image => {
+
+            image.addEventListener(
+                "error",
+                () => {
+
+                    image.style.display =
+                        "none";
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       DETECÇÃO DE CONEXÃO
+       ===================================================== */
+
+    function updateConnectionStatus() {
+
+        const connection =
+            document.querySelector(
+                "[data-connection]"
+            );
+
+
+        if (!connection)
+            return;
+
+
+        if (navigator.onLine) {
+
+            connection.textContent =
+                "● ONLINE";
+
+            connection.classList.add(
+                "online"
+            );
+
+            connection.classList.remove(
+                "offline"
+            );
+
+        } else {
+
+            connection.textContent =
+                "● OFFLINE";
+
+            connection.classList.add(
+                "offline"
+            );
+
+            connection.classList.remove(
+                "online"
+            );
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "online",
+        updateConnectionStatus
+    );
+
+    window.addEventListener(
+        "offline",
+        updateConnectionStatus
+    );
+
+
+    updateConnectionStatus();
+
+
+    /* =====================================================
+       ANIMAÇÃO DE DIGITAÇÃO
+       ===================================================== */
+
+    const typingElements =
+        document.querySelectorAll(
+            "[data-typing]"
+        );
+
+
+    typingElements.forEach(element => {
+
+        const text =
+            element.dataset.typing ||
+            element.textContent;
+
+
+        element.textContent = "";
+
+
+        let index = 0;
+
+
+        function typeText() {
+
+            if (
+                index >= text.length
+            ) return;
+
+
+            element.textContent +=
+                text[index];
+
+
+            index++;
+
+
+            setTimeout(
+                typeText,
+                35
+            );
+
+        }
+
+
+        typeText();
+
+    });
+
+
+    /* =====================================================
+       SISTEMA FINALIZADO
+       ===================================================== */
+
+    console.log(
+        "%c VISÃO EM FOCO — SISTEMA COMPLETO ",
+        "background:#7c5cff;color:white;font-size:14px;font-weight:bold;padding:8px;border-radius:6px;"
+    );
+
+    console.log(
+        "✓ Navegação carregada"
+    );
+
+    console.log(
+        "✓ Acessibilidade carregada"
+    );
+
+    console.log(
+        "✓ Simulador carregado"
+    );
+
+    console.log(
+        "✓ Quiz carregado"
+    );
+
+    console.log(
+        "✓ Disco de Newton carregado"
+    );
+
+    console.log(
+        "✓ Sistema pronto"
+    );
+    });
     });
