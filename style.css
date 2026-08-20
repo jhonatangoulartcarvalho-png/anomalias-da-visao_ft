@@ -2667,3 +2667,68 @@ button {
         var(--primary);
 
 }
+/* ==================================================
+   MODO DE ACESSIBILIDADE
+================================================== */
+
+body.accessibility-mode {
+
+    font-size:
+        18px;
+
+}
+
+
+body.accessibility-mode p {
+
+    line-height:
+        1.9;
+
+}
+
+
+body.accessibility-mode .section {
+
+    scroll-margin-top:
+        90px;
+
+}
+
+
+body.accessibility-mode .card {
+
+    border-width:
+        2px;
+
+}
+
+
+body.accessibility-mode .nav a {
+
+    font-size:
+        16px;
+
+}
+
+
+body.accessibility-mode .button {
+
+    min-height:
+        54px;
+
+}
+
+
+.accessibility-content {
+
+    flex: 1;
+
+}
+
+
+.accessibility-content .button {
+
+    margin-top:
+        18px;
+
+}
