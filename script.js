@@ -1324,41 +1324,48 @@ if (motionButton) {
 
 }
     // ==================================================
-// EFEITO DE DIGITAÇÃO
+// COPIAR TEXTO
 // ==================================================
 
-const typingElement =
-    document.querySelector(".hero h1 span");
+const copyButtons =
+    document.querySelectorAll("[data-copy]");
 
-if (typingElement) {
+copyButtons.forEach(button => {
 
-    const originalText =
-        typingElement.textContent.trim();
+    button.addEventListener("click", async () => {
 
-    typingElement.textContent = "";
+        const text =
+            button.dataset.copy;
 
-    let index = 0;
+        if (!text) return;
 
-    function typeText() {
+        try {
 
-        if (index < originalText.length) {
+            await navigator.clipboard.writeText(text);
 
-            typingElement.textContent +=
-                originalText.charAt(index);
+            const original =
+                button.textContent;
 
-            index++;
+            button.textContent =
+                "✓ Copiado!";
 
-            setTimeout(
-                typeText,
-                80
+            setTimeout(() => {
+
+                button.textContent =
+                    original;
+
+            }, 1500);
+
+        } catch (error) {
+
+            console.log(
+                "Não foi possível copiar:",
+                error
             );
 
         }
 
-    }
+    });
 
-    typeText();
-
-}
-
+});
 });
