@@ -2298,6 +2298,285 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(
         "✓ Sistema pronto"
+       /* =====================================================
+   PARTE 6 — SIMULADOR AVANÇADO
+   ===================================================== */
+
+const simulator = {
+    type: document.querySelector("#visionType"),
+    distance: document.querySelector("#objectDistance"),
+    curvature: document.querySelector("#curvature"),
+    result: document.querySelector("#simulationResult"),
+    display: document.querySelector(".simulation-display")
+};
+
+
+/* =====================================================
+   ATUALIZAÇÃO DO SIMULADOR
+   ===================================================== */
+
+function updateAdvancedSimulator() {
+
+    if (!simulator.display) return;
+
+    const type =
+        simulator.type
+            ? simulator.type.value
+            : "normal";
+
+    const distance =
+        simulator.distance
+            ? Number(simulator.distance.value)
+            : 50;
+
+    const curvature =
+        simulator.curvature
+            ? Number(simulator.curvature.value)
+            : 50;
+
+
+    /* Remove efeitos anteriores */
+
+    simulator.display.classList.remove(
+        "sim-miopia",
+        "sim-hipermetropia",
+        "sim-astigmatismo",
+        "sim-presbiopia",
+        "sim-normal"
+    );
+
+
+    /* =================================================
+       MIopia
+       ================================================= */
+
+    if (type === "miopia") {
+
+        simulator.display.classList.add(
+            "sim-miopia"
+        );
+
+    }
+
+
+    /* =================================================
+       HIPERMETROPIA
+       ================================================= */
+
+    else if (
+        type === "hipermetropia"
+    ) {
+
+        simulator.display.classList.add(
+            "sim-hipermetropia"
+        );
+
+    }
+
+
+    /* =================================================
+       ASTIGMATISMO
+       ================================================= */
+
+    else if (
+        type === "astigmatismo"
+    ) {
+
+        simulator.display.classList.add(
+            "sim-astigmatismo"
+        );
+
+    }
+
+
+    /* =================================================
+       PRESBIOPIA
+       ================================================= */
+
+    else if (
+        type === "presbiopia"
+    ) {
+
+        simulator.display.classList.add(
+            "sim-presbiopia"
+        );
+
+    }
+
+
+    /* =================================================
+       VISÃO NORMAL
+       ================================================= */
+
+    else {
+
+        simulator.display.classList.add(
+            "sim-normal"
+        );
+
+    }
+
+
+    /* =================================================
+       RESULTADO
+       ================================================= */
+
+    if (simulator.result) {
+
+        simulator.result.innerHTML = `
+            <strong>Simulação atualizada</strong>
+            <br>
+            Tipo: ${type}
+            <br>
+            Distância: ${distance}
+            <br>
+            Curvatura: ${curvature}
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   EVENTOS
+   ===================================================== */
+
+if (simulator.type) {
+
+    simulator.type.addEventListener(
+        "change",
+        updateAdvancedSimulator
+    );
+
+}
+
+
+if (simulator.distance) {
+
+    simulator.distance.addEventListener(
+        "input",
+        updateAdvancedSimulator
+    );
+
+}
+
+
+if (simulator.curvature) {
+
+    simulator.curvature.addEventListener(
+        "input",
+        updateAdvancedSimulator
+    );
+
+}
+
+
+/* Inicializa */
+
+updateAdvancedSimulator();
+
+
+/* =====================================================
+   BOTÃO RESET
+   ===================================================== */
+
+const simulatorReset =
+    document.querySelector(
+        "#resetSimulator"
+    );
+
+
+if (simulatorReset) {
+
+    simulatorReset.addEventListener(
+        "click",
+        () => {
+
+            if (simulator.type) {
+
+                simulator.type.value =
+                    "normal";
+
+            }
+
+
+            if (simulator.distance) {
+
+                simulator.distance.value =
+                    50;
+
+            }
+
+
+            if (simulator.curvature) {
+
+                simulator.curvature.value =
+                    50;
+
+            }
+
+
+            updateAdvancedSimulator();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   VALORES DOS SLIDERS
+   ===================================================== */
+
+document
+    .querySelectorAll(
+        'input[type="range"]'
+    )
+    .forEach(slider => {
+
+        const output =
+            document.querySelector(
+                `[data-output="${slider.id}"]`
+            );
+
+
+        if (!output) return;
+
+
+        slider.addEventListener(
+            "input",
+            () => {
+
+                output.textContent =
+                    slider.value;
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   STATUS DO SIMULADOR
+   ===================================================== */
+
+const simulatorStatus =
+    document.querySelector(
+        "[data-simulator-status]"
+    );
+
+
+if (simulatorStatus) {
+
+    simulatorStatus.textContent =
+        "SIMULADOR ONLINE";
+
+    simulatorStatus.classList.add(
+        "online"
+    );
+
+}
     );
     });
     });
