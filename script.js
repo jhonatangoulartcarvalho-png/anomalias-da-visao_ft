@@ -1,1216 +1,1129 @@
-```javascript
 /* =========================================================
-   VISÃO EM FOCO
-   SCRIPT.JS
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    /* =====================================================
-       ELEMENTOS PRINCIPAIS
-       ===================================================== */
-
-    const body = document.body;
-
-    const header =
-        document.querySelector(".header");
-
-    const menuButton =
-        document.querySelector(".menu-button");
-
-    const navigation =
-        document.querySelector(".navigation");
-
-    const backTop =
-        document.querySelector(".back-top");
-
-    const scrollProgress =
-        document.querySelector(".scroll-progress span");
+   VISÃO EM FOCO — SCRIPT PRINCIPAL
+========================================================= */
 
 
-    /* =====================================================
-       MENU MOBILE
-       ===================================================== */
+/* =========================================================
+   01 — ELEMENTOS
+========================================================= */
 
-    if (menuButton && navigation) {
+const body = document.body;
 
-        menuButton.addEventListener("click", () => {
+const botaoTema = document.getElementById("botaoTema");
+const botaoAcessibilidade = document.getElementById("botaoAcessibilidade");
+const botaoMenu = document.getElementById("botaoMenu");
 
-            navigation.classList.toggle("open");
+const painelAcessibilidade =
+    document.getElementById("painelAcessibilidade");
 
-            const opened =
-                navigation.classList.contains("open");
+const fecharPainel =
+    document.getElementById("fecharPainel");
 
-            menuButton.setAttribute(
-                "aria-expanded",
-                opened
-            );
+const modalLibras =
+    document.getElementById("modalLibras");
 
-            menuButton.textContent =
-                opened ? "✕" : "☰";
+const abrirLibras =
+    document.getElementById("abrirLibras");
 
-        });
+const painelLibras =
+    document.getElementById("painelLibras");
+
+const fecharLibras =
+    document.getElementById("fecharLibras");
 
 
-        navigation
-            .querySelectorAll("a")
-            .forEach(link => {
+/* =========================================================
+   02 — TEMA ESCURO
+========================================================= */
 
-                link.addEventListener("click", () => {
+if (botaoTema) {
 
-                    navigation.classList.remove("open");
+    botaoTema.addEventListener("click", () => {
 
-                    menuButton.textContent = "☰";
+        body.classList.toggle("tema-escuro");
 
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+        const escuro =
+            body.classList.contains("tema-escuro");
 
-                });
+        botaoTema.textContent =
+            escuro ? "☀" : "☼";
 
-            });
+        localStorage.setItem(
+            "temaEscuro",
+            escuro
+        );
 
+    });
+
+}
+
+
+/* Recuperar tema salvo */
+
+if (
+    localStorage.getItem("temaEscuro") === "true"
+) {
+
+    body.classList.add("tema-escuro");
+
+    if (botaoTema) {
+        botaoTema.textContent = "☀";
     }
 
+}
 
-    /* =====================================================
-       HEADER + SCROLL
-       ===================================================== */
 
-    function updateScroll() {
+/* =========================================================
+   03 — PAINEL DE ACESSIBILIDADE
+========================================================= */
 
-        const scroll =
-            window.scrollY;
+if (botaoAcessibilidade) {
 
-        if (header) {
+    botaoAcessibilidade.addEventListener(
+        "click",
+        () => {
 
-            header.classList.toggle(
-                "scrolled",
-                scroll > 40
+            painelAcessibilidade.classList.toggle(
+                "aberto"
             );
 
         }
-
-
-        if (backTop) {
-
-            backTop.classList.toggle(
-                "show",
-                scroll > 500
-            );
-
-        }
-
-
-        if (scrollProgress) {
-
-            const documentHeight =
-                document.documentElement.scrollHeight
-                - window.innerHeight;
-
-            const percentage =
-                documentHeight > 0
-                    ? (scroll / documentHeight) * 100
-                    : 0;
-
-            scrollProgress.style.width =
-                `${percentage}%`;
-
-        }
-
-    }
-
-    window.addEventListener(
-        "scroll",
-        updateScroll,
-        { passive: true }
     );
 
-    updateScroll();
+}
 
 
-    /* =====================================================
-       VOLTAR AO TOPO
-       ===================================================== */
+if (fecharPainel) {
 
-    if (backTop) {
+    fecharPainel.addEventListener(
+        "click",
+        () => {
 
-        backTop.addEventListener(
+            painelAcessibilidade.classList.remove(
+                "aberto"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   04 — MENU MOBILE
+========================================================= */
+
+if (botaoMenu) {
+
+    botaoMenu.addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "menu-aberto"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   05 — ANATOMIA DO OLHO
+========================================================= */
+
+const nomeParte =
+    document.getElementById("nomeParte");
+
+const descricaoParte =
+    document.getElementById("descricaoParte");
+
+const botoesPartes =
+    document.querySelectorAll(".parte");
+
+const pontosOlho =
+    document.querySelectorAll(".ponto");
+
+
+const partesOlho = {
+
+    cornea: {
+
+        nome: "Córnea",
+
+        descricao:
+            "A córnea é a camada transparente localizada na parte frontal do olho. Ela ajuda a proteger o olho e participa da focalização da luz."
+    },
+
+    iris: {
+
+        nome: "Íris",
+
+        descricao:
+            "A íris é a região colorida do olho. Ela controla a quantidade de luz que entra através da pupila."
+    },
+
+    pupila: {
+
+        nome: "Pupila",
+
+        descricao:
+            "A pupila é a abertura localizada no centro da íris. Seu tamanho muda de acordo com a quantidade de luz."
+    },
+
+    retina: {
+
+        nome: "Retina",
+
+        descricao:
+            "A retina fica na parte interna posterior do olho e contém células sensíveis à luz que ajudam a transformar estímulos luminosos em sinais nervosos."
+    }
+
+};
+
+
+function mostrarParte(parte) {
+
+    if (!partesOlho[parte]) {
+        return;
+    }
+
+    nomeParte.textContent =
+        partesOlho[parte].nome;
+
+    descricaoParte.textContent =
+        partesOlho[parte].descricao;
+
+
+    botoesPartes.forEach(
+        botao => {
+
+            botao.classList.toggle(
+                "ativa",
+                botao.dataset.parte === parte
+            );
+
+        }
+    );
+
+}
+
+
+botoesPartes.forEach(
+    botao => {
+
+        botao.addEventListener(
             "click",
             () => {
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+                mostrarParte(
+                    botao.dataset.parte
+                );
 
             }
         );
 
     }
+);
 
 
-    /* =====================================================
-       LINKS INTERNOS
-       ===================================================== */
+pontosOlho.forEach(
+    ponto => {
 
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach(link => {
+        ponto.addEventListener(
+            "click",
+            () => {
 
-            link.addEventListener("click", event => {
+                mostrarParte(
+                    ponto.dataset.parte
+                );
 
-                const targetId =
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   06 — ANOMALIAS DA VISÃO
+========================================================= */
+
+const cardsAnomalias =
+    document.querySelectorAll(".card-anomalia");
+
+const nomeAnomalia =
+    document.getElementById("nomeAnomalia");
+
+const descricaoAnomalia =
+    document.getElementById("descricaoAnomalia");
+
+const categoriaAnomalia =
+    document.getElementById("categoriaAnomalia");
+
+
+const dadosAnomalias = {
+
+    miopia: {
+
+        nome: "Miopia",
+
+        categoria:
+            "ERRO DE REFRAÇÃO",
+
+        descricao:
+            "Na miopia, objetos distantes podem parecer desfocados porque a imagem tende a se formar antes da retina."
+
+    },
+
+    hipermetropia: {
+
+        nome: "Hipermetropia",
+
+        categoria:
+            "ERRO DE REFRAÇÃO",
+
+        descricao:
+            "Na hipermetropia, a focalização de objetos próximos pode ser mais difícil, especialmente em determinadas situações."
+
+    },
+
+    astigmatismo: {
+
+        nome: "Astigmatismo",
+
+        categoria:
+            "ERRO DE REFRAÇÃO",
+
+        descricao:
+            "O astigmatismo está relacionado a uma curvatura irregular da córnea ou do cristalino e pode causar visão desfocada ou distorcida."
+
+    },
+
+    presbiopia: {
+
+        nome: "Presbiopia",
+
+        categoria:
+            "ALTERAÇÃO DA ACOMODAÇÃO",
+
+        descricao:
+            "A presbiopia está relacionada à redução gradual da capacidade de focalizar objetos próximos, geralmente associada ao envelhecimento."
+
+    },
+
+    catarata: {
+
+        nome: "Catarata",
+
+        categoria:
+            "ALTERAÇÃO DO CRISTALINO",
+
+        descricao:
+            "A catarata ocorre quando o cristalino fica opaco, podendo provocar visão embaçada e dificuldade para enxergar com nitidez."
+
+    },
+
+    daltonismo: {
+
+        nome: "Daltonismo",
+
+        categoria:
+            "PERCEPÇÃO DAS CORES",
+
+        descricao:
+            "O daltonismo envolve diferenças na percepção de determinadas cores. Existem diferentes tipos e graus de alteração."
+
+    }
+
+};
+
+
+cardsAnomalias.forEach(
+    card => {
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                const tipo =
+                    card.dataset.tipo;
+
+                const dados =
+                    dadosAnomalias[tipo];
+
+                if (!dados) {
+                    return;
+                }
+
+                nomeAnomalia.textContent =
+                    dados.nome;
+
+                categoriaAnomalia.textContent =
+                    dados.categoria;
+
+                descricaoAnomalia.textContent =
+                    dados.descricao;
+
+
+                cardsAnomalias.forEach(
+                    outroCard => {
+
+                        outroCard.style.outline =
+                            "none";
+
+                    }
+                );
+
+
+                card.style.outline =
+                    "2px solid #c7ff45";
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   07 — LABORATÓRIO VISUAL
+========================================================= */
+
+const tipoVisao =
+    document.getElementById("tipoVisao");
+
+const intensidade =
+    document.getElementById("intensidade");
+
+const valorIntensidade =
+    document.getElementById("valorIntensidade");
+
+const previewVisao =
+    document.getElementById("previewVisao");
+
+const nomeVisao =
+    document.getElementById("nomeVisao");
+
+const resetarVisao =
+    document.getElementById("resetarVisao");
+
+
+function aplicarVisao() {
+
+    if (!tipoVisao || !intensidade) {
+        return;
+    }
+
+    const tipo =
+        tipoVisao.value;
+
+    const valor =
+        Number(intensidade.value);
+
+
+    valorIntensidade.textContent =
+        valor + "%";
+
+    nomeVisao.textContent =
+        tipoVisao.options[
+            tipoVisao.selectedIndex
+        ].text.toUpperCase();
+
+
+    /* Remove filtros antigos */
+
+    previewVisao.style.filter =
+        "none";
+
+
+    /* =========================================
+       NORMAL
+    ========================================= */
+
+    if (tipo === "normal") {
+
+        previewVisao.style.filter =
+            "none";
+
+    }
+
+
+    /* =========================================
+       MIOPIA
+    ========================================= */
+
+    else if (tipo === "miopia") {
+
+        const blur =
+            (valor / 100) * 7;
+
+        previewVisao.style.filter =
+            `blur(${blur}px)`;
+
+    }
+
+
+    /* =========================================
+       HIPERMETROPIA
+    ========================================= */
+
+    else if (tipo === "hipermetropia") {
+
+        const blur =
+            (valor / 100) * 4;
+
+        const brightness =
+            1 + (valor / 100) * 0.12;
+
+        previewVisao.style.filter =
+            `blur(${blur}px) brightness(${brightness})`;
+
+    }
+
+
+    /* =========================================
+       ASTIGMATISMO
+    ========================================= */
+
+    else if (tipo === "astigmatismo") {
+
+        const blur =
+            (valor / 100) * 3;
+
+        previewVisao.style.filter =
+            `blur(${blur}px)`;
+
+        previewVisao.style.transform =
+            `scaleX(${1 + valor / 1000})`;
+
+    }
+
+
+    /* =========================================
+       PRESBIOPIA
+    ========================================= */
+
+    else if (tipo === "presbiopia") {
+
+        const blur =
+            (valor / 100) * 6;
+
+        previewVisao.style.filter =
+            `blur(${blur}px)`;
+
+    }
+
+
+    /* =========================================
+       CATARATA
+    ========================================= */
+
+    else if (tipo === "catarata") {
+
+        const blur =
+            (valor / 100) * 3;
+
+        const brightness =
+            1 - (valor / 100) * 0.15;
+
+        const contrast =
+            1 - (valor / 100) * 0.25;
+
+        previewVisao.style.filter =
+            `blur(${blur}px) brightness(${brightness}) contrast(${contrast})`;
+
+    }
+
+
+    /* =========================================
+       DALTONISMO
+    ========================================= */
+
+    else if (tipo === "daltonismo") {
+
+        const intensidadeDaltonismo =
+            valor / 100;
+
+        const grayscale =
+            intensidadeDaltonismo * 0.35;
+
+        previewVisao.style.filter =
+            `saturate(${1 - intensidadeDaltonismo * 0.6}) grayscale(${grayscale})`;
+
+    }
+
+}
+
+
+if (tipoVisao) {
+
+    tipoVisao.addEventListener(
+        "change",
+        aplicarVisao
+    );
+
+}
+
+
+if (intensidade) {
+
+    intensidade.addEventListener(
+        "input",
+        aplicarVisao
+    );
+
+}
+
+
+if (resetarVisao) {
+
+    resetarVisao.addEventListener(
+        "click",
+        () => {
+
+            tipoVisao.value =
+                "normal";
+
+            intensidade.value =
+                50;
+
+            previewVisao.style.transform =
+                "none";
+
+            aplicarVisao();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   08 — QUIZ
+========================================================= */
+
+const finalizarQuiz =
+    document.getElementById("finalizarQuiz");
+
+const pontuacao =
+    document.getElementById("pontuacao");
+
+const mensagemQuiz =
+    document.getElementById("mensagemQuiz");
+
+const perguntas =
+    document.querySelectorAll(".pergunta");
+
+
+if (finalizarQuiz) {
+
+    finalizarQuiz.addEventListener(
+        "click",
+        () => {
+
+            let acertos = 0;
+
+            let respondidas = 0;
+
+
+            perguntas.forEach(
+                pergunta => {
+
+                    const respostaCorreta =
+                        pergunta.dataset.resposta;
+
+                    const marcada =
+                        pergunta.querySelector(
+                            "input:checked"
+                        );
+
+
+                    if (marcada) {
+
+                        respondidas++;
+
+                        if (
+                            marcada.value ===
+                            respostaCorreta
+                        ) {
+
+                            acertos++;
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+            if (respondidas < perguntas.length) {
+
+                mensagemQuiz.textContent =
+                    "Responda todas as perguntas antes de finalizar.";
+
+                return;
+
+            }
+
+
+            const porcentagem =
+                Math.round(
+                    (acertos / perguntas.length) * 100
+                );
+
+
+            pontuacao.textContent =
+                porcentagem + "%";
+
+
+            if (porcentagem === 100) {
+
+                mensagemQuiz.textContent =
+                    "Excelente! Você acertou tudo.";
+
+            }
+
+            else if (porcentagem >= 66) {
+
+                mensagemQuiz.textContent =
+                    "Muito bom! Você está dominando o assunto.";
+
+            }
+
+            else if (porcentagem >= 33) {
+
+                mensagemQuiz.textContent =
+                    "Bom começo! Continue explorando o conteúdo.";
+
+            }
+
+            else {
+
+                mensagemQuiz.textContent =
+                    "Vale revisar o conteúdo e tentar novamente.";
+
+            }
+
+
+            window.scrollTo({
+
+                top:
+                    document.getElementById("quiz").offsetTop - 80,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   09 — TAMANHO DA FONTE
+========================================================= */
+
+const diminuirFonte =
+    document.getElementById("diminuirFonte");
+
+const aumentarFonte =
+    document.getElementById("aumentarFonte");
+
+const resetarFonte =
+    document.getElementById("resetarFonte");
+
+let tamanhoFonte = 16;
+
+
+function atualizarFonte() {
+
+    body.classList.remove(
+        "fonte-grande",
+        "fonte-muito-grande"
+    );
+
+
+    if (tamanhoFonte >= 21) {
+
+        body.classList.add(
+            "fonte-muito-grande"
+        );
+
+    }
+
+    else if (tamanhoFonte >= 18) {
+
+        body.classList.add(
+            "fonte-grande"
+        );
+
+    }
+
+}
+
+
+if (aumentarFonte) {
+
+    aumentarFonte.addEventListener(
+        "click",
+        () => {
+
+            tamanhoFonte += 2;
+
+            if (tamanhoFonte > 22) {
+                tamanhoFonte = 22;
+            }
+
+            atualizarFonte();
+
+        }
+    );
+
+}
+
+
+if (diminuirFonte) {
+
+    diminuirFonte.addEventListener(
+        "click",
+        () => {
+
+            tamanhoFonte -= 2;
+
+            if (tamanhoFonte < 14) {
+                tamanhoFonte = 14;
+            }
+
+            if (tamanhoFonte < 18) {
+
+                body.classList.remove(
+                    "fonte-grande",
+                    "fonte-muito-grande"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+if (resetarFonte) {
+
+    resetarFonte.addEventListener(
+        "click",
+        () => {
+
+            tamanhoFonte = 16;
+
+            body.classList.remove(
+                "fonte-grande",
+                "fonte-muito-grande"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   10 — FONTE MAIS LEGÍVEL
+========================================================= */
+
+const fonteLegivel =
+    document.getElementById("fonteLegivel");
+
+
+if (fonteLegivel) {
+
+    fonteLegivel.addEventListener(
+        "click",
+        () => {
+
+            body.classList.toggle(
+                "fonte-legivel"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   11 — ALTO CONTRASTE
+========================================================= */
+
+const altoContraste =
+    document.getElementById("altoContraste");
+
+
+if (altoContraste) {
+
+    altoContraste.addEventListener(
+        "click",
+        () => {
+
+            body.classList.toggle(
+                "alto-contraste"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   12 — LIBRAS
+========================================================= */
+
+function abrirModalLibras() {
+
+    if (!modalLibras) {
+        return;
+    }
+
+    modalLibras.classList.add(
+        "aberto"
+    );
+
+    body.style.overflow =
+        "hidden";
+
+}
+
+
+function fecharModalLibras() {
+
+    if (!modalLibras) {
+        return;
+    }
+
+    modalLibras.classList.remove(
+        "aberto"
+    );
+
+    body.style.overflow =
+        "";
+
+}
+
+
+if (abrirLibras) {
+
+    abrirLibras.addEventListener(
+        "click",
+        abrirModalLibras
+    );
+
+}
+
+
+if (painelLibras) {
+
+    painelLibras.addEventListener(
+        "click",
+        abrirModalLibras
+    );
+
+}
+
+
+if (fecharLibras) {
+
+    fecharLibras.addEventListener(
+        "click",
+        fecharModalLibras
+    );
+
+}
+
+
+/* Fechar clicando fora */
+
+if (modalLibras) {
+
+    modalLibras.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                modalLibras
+            ) {
+
+                fecharModalLibras();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* Fechar com ESC */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Escape") {
+
+            fecharModalLibras();
+
+            painelAcessibilidade.classList.remove(
+                "aberto"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   13 — LINKS DO MENU
+========================================================= */
+
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(
+    link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                const destino =
                     link.getAttribute("href");
 
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
+                const elemento =
+                    document.querySelector(destino);
+
+
+                if (!elemento) {
                     return;
                 }
 
-                const target =
-                    document.querySelector(targetId);
-
-                if (!target) {
-                    return;
-                }
 
                 event.preventDefault();
 
-                const headerHeight =
-                    header
-                        ? header.offsetHeight
-                        : 0;
 
-                const position =
-                    target.getBoundingClientRect().top
-                    + window.scrollY
-                    - headerHeight
-                    - 15;
-
-                window.scrollTo({
-                    top: position,
-                    behavior: "smooth"
+                elemento.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
                 });
 
-            });
 
-        });
-
-
-    /* =====================================================
-       ACESSIBILIDADE
-       ===================================================== */
-
-    let fontScale = 1;
-
-    const fontIncrease =
-        document.querySelector("#fontIncrease");
-
-    const fontDecrease =
-        document.querySelector("#fontDecrease");
-
-    const fontReset =
-        document.querySelector("#fontReset");
-
-    const contrastButton =
-        document.querySelector("#contrastToggle");
-
-    const readableButton =
-        document.querySelector("#readableFont");
-
-    const fontStatus =
-        document.querySelector("#fontStatus");
-
-
-    function updateFont() {
-
-        fontScale =
-            Math.max(
-                0.85,
-                Math.min(1.35, fontScale)
-            );
-
-        document.documentElement
-            .style
-            .setProperty(
-                "--font-scale",
-                fontScale
-            );
-
-
-        if (fontStatus) {
-
-            fontStatus.textContent =
-                `Tamanho da fonte: ${Math.round(
-                    fontScale * 100
-                )}%`;
-
-        }
-
-    }
-
-
-    if (fontIncrease) {
-
-        fontIncrease.addEventListener(
-            "click",
-            () => {
-
-                fontScale += 0.1;
-
-                updateFont();
-
-            }
-        );
-
-    }
-
-
-    if (fontDecrease) {
-
-        fontDecrease.addEventListener(
-            "click",
-            () => {
-
-                fontScale -= 0.1;
-
-                updateFont();
-
-            }
-        );
-
-    }
-
-
-    if (fontReset) {
-
-        fontReset.addEventListener(
-            "click",
-            () => {
-
-                fontScale = 1;
-
-                updateFont();
-
-            }
-        );
-
-    }
-
-
-    if (contrastButton) {
-
-        contrastButton.addEventListener(
-            "click",
-            () => {
-
-                body.classList.toggle(
-                    "high-contrast"
-                );
-
-                const active =
-                    body.classList.contains(
-                        "high-contrast"
-                    );
-
-                contrastButton.setAttribute(
-                    "aria-pressed",
-                    active
+                body.classList.remove(
+                    "menu-aberto"
                 );
 
             }
         );
 
     }
+);
 
 
-    if (readableButton) {
+/* =========================================================
+   14 — ANIMAÇÃO AO ENTRAR NA TELA
+========================================================= */
 
-        readableButton.addEventListener(
-            "click",
-            () => {
+const elementosAnimados =
+    document.querySelectorAll(
+        ".card-anomalia, .processo article, .detalhes-anomalia"
+    );
 
-                body.classList.toggle(
-                    "readable-font"
-                );
 
-                const active =
-                    body.classList.contains(
-                        "readable-font"
-                    );
+const observador =
+    new IntersectionObserver(
+        elementos => {
 
-                readableButton.setAttribute(
-                    "aria-pressed",
-                    active
-                );
+            elementos.forEach(
+                elemento => {
 
-            }
-        );
+                    if (
+                        elemento.isIntersecting
+                    ) {
 
-    }
-
-
-    updateFont();
-
-
-    /* =====================================================
-       LABORATÓRIO DE VISÃO
-       ===================================================== */
-
-    const visionType =
-        document.querySelector("#visionType");
-
-    const visionIntensity =
-        document.querySelector("#visionIntensity");
-
-    const intensityValue =
-        document.querySelector("#intensityValue");
-
-    const visionPreview =
-        document.querySelector("#visionPreview");
-
-    const resetVision =
-        document.querySelector("#resetVision");
-
-
-    function updateVision() {
-
-        if (
-            !visionType ||
-            !visionIntensity ||
-            !visionPreview
-        ) {
-            return;
-        }
-
-
-        const type =
-            visionType.value;
-
-        const intensity =
-            Number(
-                visionIntensity.value
-            );
-
-
-        if (intensityValue) {
-
-            intensityValue.textContent =
-                `${intensity}%`;
-
-        }
-
-
-        visionPreview.style.filter =
-            "none";
-
-
-        visionPreview.style.transform =
-            "none";
-
-
-        visionPreview.style.opacity =
-            "1";
-
-
-        switch (type) {
-
-            case "miopia":
-
-                visionPreview.style.filter =
-                    `blur(${intensity / 18}px)`;
-
-                break;
-
-
-            case "hipermetropia":
-
-                visionPreview.style.filter =
-                    `blur(${intensity / 22}px)`;
-
-                break;
-
-
-            case "astigmatismo":
-
-                visionPreview.style.filter =
-                    `blur(${intensity / 28}px)`;
-
-                visionPreview.style.transform =
-                    `skewX(${intensity / 80}deg)`;
-
-                break;
-
-
-            case "presbiopia":
-
-                visionPreview.style.filter =
-                    `blur(${intensity / 20}px)`;
-
-                break;
-
-
-            case "catarata":
-
-                visionPreview.style.filter =
-                    `blur(${intensity / 30}px)`;
-
-                visionPreview.style.opacity =
-                    1 - intensity / 300;
-
-                visionPreview.style.background =
-                    `
-                    linear-gradient(
-                        rgba(230,220,180,
-                        ${intensity / 180}),
-                        rgba(210,200,160,
-                        ${intensity / 180})
-                    ),
-                    linear-gradient(
-                        180deg,
-                        #173e63,
-                        #07110c
-                    )
-                    `;
-
-                break;
-
-
-            case "daltonismo":
-
-                visionPreview.style.filter =
-                    `saturate(${1 - intensity / 150})`;
-
-                break;
-
-
-            default:
-
-                visionPreview.style.filter =
-                    "none";
-
-                break;
-
-        }
-
-    }
-
-
-    if (visionType) {
-
-        visionType.addEventListener(
-            "change",
-            updateVision
-        );
-
-    }
-
-
-    if (visionIntensity) {
-
-        visionIntensity.addEventListener(
-            "input",
-            updateVision
-        );
-
-    }
-
-
-    if (resetVision) {
-
-        resetVision.addEventListener(
-            "click",
-            () => {
-
-                if (visionType) {
-                    visionType.value =
-                        "normal";
-                }
-
-                if (visionIntensity) {
-                    visionIntensity.value =
-                        "50";
-                }
-
-                updateVision();
-
-            }
-        );
-
-    }
-
-
-    updateVision();
-
-
-    /* =====================================================
-       ANATOMIA DO OLHO
-       ===================================================== */
-
-    const partButtons =
-        document.querySelectorAll(
-            ".part-buttons button"
-        );
-
-    const anatomyTitle =
-        document.querySelector(
-            "#anatomyTitle"
-        );
-
-    const anatomyDescription =
-        document.querySelector(
-            "#anatomyDescription"
-        );
-
-
-    const anatomyData = {
-
-        cornea: {
-            title: "Córnea",
-            text:
-                "A córnea é a camada transparente localizada na parte frontal do olho. Ela ajuda a proteger o olho e participa da focalização da luz."
-        },
-
-        iris: {
-            title: "Íris",
-            text:
-                "A íris é a região colorida do olho. Ela controla a quantidade de luz que entra através da pupila."
-        },
-
-        pupil: {
-            title: "Pupila",
-            text:
-                "A pupila é a abertura no centro da íris. Seu tamanho varia conforme a quantidade de luz presente no ambiente."
-        },
-
-        retina: {
-            title: "Retina",
-            text:
-                "A retina contém células sensíveis à luz. Ela transforma os estímulos luminosos em sinais que serão enviados ao cérebro."
-        }
-
-    };
-
-
-    partButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                partButtons
-                    .forEach(item =>
-                        item.classList.remove(
-                            "active"
-                        )
-                    );
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                const part =
-                    button.dataset.part;
-
-                const information =
-                    anatomyData[part];
-
-                if (!information) {
-                    return;
-                }
-
-
-                if (anatomyTitle) {
-
-                    anatomyTitle.textContent =
-                        information.title;
-
-                }
-
-
-                if (anatomyDescription) {
-
-                    anatomyDescription.textContent =
-                        information.text;
-
-                }
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       HOTSPOTS DO OLHO
-       ===================================================== */
-
-    const hotspots =
-        document.querySelectorAll(
-            ".hotspot"
-        );
-
-
-    hotspots.forEach(hotspot => {
-
-        hotspot.addEventListener(
-            "click",
-            () => {
-
-                const part =
-                    hotspot.dataset.part;
-
-                const button =
-                    document.querySelector(
-                        `.part-buttons button[data-part="${part}"]`
-                    );
-
-                if (button) {
-                    button.click();
-                }
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       ANOMALIAS
-       ===================================================== */
-
-    const anomalyCards =
-        document.querySelectorAll(
-            ".anomaly-card"
-        );
-
-    const anomalyTitle =
-        document.querySelector(
-            "#anomalyTitle"
-        );
-
-    const anomalyDescription =
-        document.querySelector(
-            "#anomalyDescription"
-        );
-
-    const anomalyLabel =
-        document.querySelector(
-            "#anomalyLabel"
-        );
-
-
-    const anomalies = {
-
-        miopia: {
-            title: "Miopia",
-            description:
-                "A miopia dificulta a visão de objetos distantes. A imagem tende a se formar antes da retina.",
-            label: "ERRO DE REFRAÇÃO"
-        },
-
-        hipermetropia: {
-            title: "Hipermetropia",
-            description:
-                "A hipermetropia pode dificultar principalmente a visão de objetos próximos.",
-            label: "ERRO DE REFRAÇÃO"
-        },
-
-        astigmatismo: {
-            title: "Astigmatismo",
-            description:
-                "O astigmatismo está relacionado a uma curvatura irregular da córnea ou do cristalino, podendo causar visão distorcida ou desfocada.",
-            label: "ERRO DE REFRAÇÃO"
-        },
-
-        presbiopia: {
-            title: "Presbiopia",
-            description:
-                "A presbiopia está relacionada à redução da capacidade de focalização para objetos próximos que ocorre naturalmente com o envelhecimento.",
-            label: "ALTERAÇÃO VISUAL"
-        },
-
-        catarata: {
-            title: "Catarata",
-            description:
-                "A catarata ocorre quando o cristalino fica progressivamente opaco, podendo deixar a visão menos nítida.",
-            label: "ALTERAÇÃO DO CRISTALINO"
-        },
-
-        daltonismo: {
-            title: "Daltonismo",
-            description:
-                "O daltonismo envolve diferenças na percepção de determinadas cores. Existem diferentes tipos e intensidades.",
-            label: "PERCEPÇÃO DAS CORES"
-        }
-
-    };
-
-
-    function selectAnomaly(card) {
-
-        anomalyCards
-            .forEach(item =>
-                item.classList.remove(
-                    "active"
-                )
-            );
-
-        card.classList.add("active");
-
-
-        const type =
-            card.dataset.anomaly;
-
-        const data =
-            anomalies[type];
-
-        if (!data) {
-            return;
-        }
-
-
-        if (anomalyTitle) {
-            anomalyTitle.textContent =
-                data.title;
-        }
-
-        if (anomalyDescription) {
-            anomalyDescription.textContent =
-                data.description;
-        }
-
-        if (anomalyLabel) {
-            anomalyLabel.textContent =
-                data.label;
-        }
-
-    }
-
-
-    anomalyCards.forEach(card => {
-
-        card.addEventListener(
-            "click",
-            () => selectAnomaly(card)
-        );
-
-        card.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    selectAnomaly(card);
-
-                }
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       DISCO DE NEWTON
-       ===================================================== */
-
-    const newtonDisc =
-        document.querySelector(
-            ".newton-disc"
-        );
-
-    const spinButton =
-        document.querySelector(
-            "#spinNewton"
-        );
-
-
-    if (spinButton && newtonDisc) {
-
-        let rotation = 0;
-
-        spinButton.addEventListener(
-            "click",
-            () => {
-
-                rotation += 1440;
-
-                newtonDisc.style.transform =
-                    `rotate(${rotation}deg)`;
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       QUIZ
-       ===================================================== */
-
-    const quiz =
-        document.querySelector(
-            "#visionQuiz"
-        );
-
-    const quizButton =
-        document.querySelector(
-            "#finishQuiz"
-        );
-
-    const quizResult =
-        document.querySelector(
-            "#quizResult"
-        );
-
-    const scoreNumber =
-        document.querySelector(
-            "#scoreNumber"
-        );
-
-    const scoreBar =
-        document.querySelector(
-            ".score-bar span"
-        );
-
-
-    if (quizButton && quiz) {
-
-        quizButton.addEventListener(
-            "click",
-            () => {
-
-                const questions =
-                    quiz.querySelectorAll(
-                        ".question"
-                    );
-
-                let correct = 0;
-
-                let answered = 0;
-
-
-                questions.forEach(
-                    question => {
-
-                        const selected =
-                            question.querySelector(
-                                "input:checked"
-                            );
-
-                        if (!selected) {
-                            return;
-                        }
-
-                        answered++;
-
-
-                        if (
-                            selected.dataset.correct ===
-                            "true"
-                        ) {
-
-                            correct++;
-
-                        }
-
-                    }
-                );
-
-
-                if (answered < questions.length) {
-
-                    if (quizResult) {
-
-                        quizResult.style.display =
-                            "block";
-
-                        quizResult.textContent =
-                            `Responda todas as ${questions.length} questões antes de finalizar.`;
+                        elemento.target.classList.add(
+                            "visivel"
+                        );
 
                     }
 
-                    return;
-
                 }
+            );
 
-
-                const percentage =
-                    Math.round(
-                        (correct /
-                        questions.length) * 100
-                    );
-
-
-                if (scoreNumber) {
-
-                    scoreNumber.textContent =
-                        `${percentage}%`;
-
-                }
-
-
-                if (scoreBar) {
-
-                    scoreBar.style.width =
-                        `${percentage}%`;
-
-                }
-
-
-                if (quizResult) {
-
-                    quizResult.style.display =
-                        "block";
-
-                    quizResult.textContent =
-                        `Você acertou ${correct} de ${questions.length} questões!`;
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       MODAL LIBRAS
-       ===================================================== */
-
-    const librasModal =
-        document.querySelector(
-            ".libras-modal"
-        );
-
-    const openLibras =
-        document.querySelectorAll(
-            "[data-open-libras]"
-        );
-
-    const closeLibras =
-        document.querySelectorAll(
-            "[data-close-libras]"
-        );
-
-
-    function openLibrasModal() {
-
-        if (!librasModal) {
-            return;
-        }
-
-        librasModal.classList.add(
-            "active"
-        );
-
-        body.classList.add(
-            "no-scroll"
-        );
-
-        librasModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-    }
-
-
-    function closeLibrasModal() {
-
-        if (!librasModal) {
-            return;
-        }
-
-        librasModal.classList.remove(
-            "active"
-        );
-
-        body.classList.remove(
-            "no-scroll"
-        );
-
-        librasModal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-    }
-
-
-    openLibras.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            openLibrasModal
-        );
-
-    });
-
-
-    closeLibras.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            closeLibrasModal
-        );
-
-    });
-
-
-    if (librasModal) {
-
-        librasModal.addEventListener(
-            "click",
-            event => {
-
-                if (
-                    event.target ===
-                    librasModal
-                ) {
-
-                    closeLibrasModal();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                closeLibrasModal();
-
-            }
-
+        },
+        {
+            threshold: 0.12
         }
     );
 
 
-    /* =====================================================
-       ANIMAÇÃO AO ENTRAR NA TELA
-       ===================================================== */
+elementosAnimados.forEach(
+    elemento => {
 
-    const animatedElements =
-        document.querySelectorAll(
-            ".process-card, .anomaly-card, .question, .anatomy-info, .libras-card"
-        );
+        elemento.style.opacity = "0";
 
-
-    const observer =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(
-                    entry => {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.style.opacity =
-                                "1";
-
-                            entry.target.style.transform =
-                                "translateY(0)";
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-            {
-                threshold: .12
-            }
-        );
-
-
-    animatedElements.forEach(element => {
-
-        element.style.opacity = "0";
-
-        element.style.transform =
+        elemento.style.transform =
             "translateY(25px)";
 
-        element.style.transition =
-            "opacity .6s ease, transform .6s ease";
+        elemento.style.transition =
+            "opacity .7s ease, transform .7s ease";
 
-        observer.observe(element);
+        observador.observe(elemento);
 
-    });
+    }
+);
 
 
-    /* =====================================================
-       DATA ATUAL NO FOOTER
-       ===================================================== */
+/* =========================================================
+   15 — CLASSE DE ANIMAÇÃO
+========================================================= */
 
-    const year =
-        document.querySelector(
-            "#currentYear"
-        );
+const estiloAnimacao =
+    document.createElement("style");
 
-    if (year) {
+estiloAnimacao.textContent = `
 
-        year.textContent =
-            new Date().getFullYear();
+    .card-anomalia.visivel,
+    .processo article.visivel,
+    .detalhes-anomalia.visivel {
+
+        opacity: 1 !important;
+
+        transform:
+            translateY(0) !important;
 
     }
 
+`;
 
-    /* =====================================================
-       TECLA TAB — ACESSIBILIDADE
-       ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Tab"
-            ) {
-
-                body.classList.add(
-                    "keyboard-user"
-                );
-
-            }
-
-        }
-    );
+document.head.appendChild(
+    estiloAnimacao
+);
 
 
-    /* =====================================================
-       FINALIZAÇÃO
-       ===================================================== */
+/* =========================================================
+   16 — INICIALIZAÇÃO
+========================================================= */
 
-    console.log(
-        "VISÃO EM FOCO — site carregado com sucesso."
-    );
+aplicarVisao();
 
-});
-```
+mostrarParte("cornea");
 
+
+console.log(
+    "VISÃO EM FOCO iniciado com sucesso."
+);
