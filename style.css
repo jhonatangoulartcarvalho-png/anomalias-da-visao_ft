@@ -2824,3 +2824,103 @@ body.accessibility-mode .button {
         width .08s linear;
 
 }
+/* ==================================================
+   BOTÃO DE TEMA
+================================================== */
+
+.theme-button {
+
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    color:
+        var(--text);
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        10px;
+
+    font-size:
+        18px;
+
+    transition:
+        .25s ease;
+
+}
+
+
+.theme-button:hover {
+
+    color:
+        var(--primary);
+
+    border-color:
+        rgba(88,230,255,.3);
+
+    transform:
+        rotate(15deg);
+
+}
+/* ==================================================
+   TEMA CLARO
+================================================== */
+
+body.light-theme {
+
+    --bg: #f4f7fb;
+
+    --bg-dark: #e8edf5;
+
+    --card: #ffffff;
+
+    --card-hover: #f7faff;
+
+    --text: #111827;
+
+    --text-soft: #526174;
+
+    --border:
+        rgba(15,23,42,.12);
+
+}
+
+
+body.light-theme .header {
+
+    background:
+        rgba(244,247,251,.92);
+
+}
+
+
+body.light-theme .vision-preview {
+
+    background:
+        #e9eef6;
+
+}
+
+
+body.light-theme .section.dark {
+
+    background:
+        var(--bg-dark);
+
+}
+
+
+body.light-theme .footer {
+
+    background:
+        #dde4ee;
+
+}
