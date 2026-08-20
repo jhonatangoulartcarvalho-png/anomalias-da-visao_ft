@@ -519,3 +519,247 @@ document.addEventListener(
 
 
 console.log("♿ Parte 3 carregada!");
+// ==========================================
+// PARTE 4 — ANOMALIAS E PESQUISA
+// ==========================================
+
+
+// ==========================================
+// FILTROS
+// ==========================================
+
+const filterButtons =
+    document.querySelectorAll(
+        "[data-filter]"
+    );
+
+
+const anomalyCards =
+    document.querySelectorAll(
+        "[data-category], .anomaly-card"
+    );
+
+
+filterButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const filter =
+                button.dataset.filter;
+
+
+            // Botão ativo
+
+            filterButtons.forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            // Filtrar cards
+
+            anomalyCards.forEach(card => {
+
+                const category =
+                    card.dataset.category;
+
+
+                if (
+                    filter === "all" ||
+                    filter === "*" ||
+                    !category ||
+                    category === filter
+                ) {
+
+                    card.style.display = "";
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+    );
+
+});
+
+
+// ==========================================
+// PESQUISA
+// ==========================================
+
+const searchInput =
+    document.querySelector(
+        "#searchInput, [data-search]"
+    );
+
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        () => {
+
+            const search =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            anomalyCards.forEach(card => {
+
+                const text =
+                    card.innerText
+                        .toLowerCase();
+
+
+                if (
+                    search === "" ||
+                    text.includes(search)
+                ) {
+
+                    card.style.display = "";
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// CARDS — EFEITO DE HOVER
+// ==========================================
+
+document
+    .querySelectorAll(
+        ".anomaly-card"
+    )
+    .forEach(card => {
+
+        card.addEventListener(
+            "mouseenter",
+            () => {
+
+                card.classList.add(
+                    "card-hover"
+                );
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                card.classList.remove(
+                    "card-hover"
+                );
+
+            }
+        );
+
+    });
+
+
+// ==========================================
+// BOTÕES "SAIBA MAIS"
+// ==========================================
+
+document
+    .querySelectorAll(
+        "[data-expand]"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const targetSelector =
+                    button.dataset.expand;
+
+
+                const target =
+                    document.querySelector(
+                        targetSelector
+                    );
+
+
+                if (!target) return;
+
+
+                target.classList.toggle(
+                    "expanded"
+                );
+
+
+                const expanded =
+                    target.classList.contains(
+                        "expanded"
+                    );
+
+
+                button.setAttribute(
+                    "aria-expanded",
+                    expanded
+                );
+
+            }
+        );
+
+    });
+
+
+// ==========================================
+// PESQUISA COM ENTER
+// ==========================================
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                searchInput.value = "";
+
+                searchInput.dispatchEvent(
+                    new Event("input")
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+console.log("👁️ Parte 4 carregada!");
